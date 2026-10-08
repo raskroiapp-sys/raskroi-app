@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+[19:39, 10/8/2026] Giorgi: <!DOCTYPE html>
 <html lang="ka">
 <head>
   <meta charset="UTF-8">
@@ -14,3 +14,136 @@
 
   <!-- მობილურის კონტეინერი -->
   <div class="w-full max-w-md bg-white min-h-screen sm:min-h-[844px] shadow-xl flex flex-col justify-be…
+[21:41, 10/8/2026] Giorgi: <!DOCTYPE html>
+<html lang="ka">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>ჭკვიანი რასკროი - Smart Raskroi</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Noto Sans Georgian', sans-serif; -webkit-tap-highlight-color: transparent; }
+  </style>
+</head>
+<body class="bg-slate-950 text-slate-100 min-h-screen flex justify-center items-start p-0 sm:p-4">
+
+  <!-- მობილურის ეკრანის კონტეინერი -->
+  <div class="w-full max-w-md bg-slate-900 min-h-screen sm:min-h-[844px] shadow-2xl flex flex-col justify-between sm:rounded-3xl overflow-hidden border border-slate-800">
+    
+    <!-- ზედა ჰედერი -->
+    <header class="bg-slate-900 text-white p-5 pt-8 border-b border-slate-800 flex items-center justify-between">
+      <div>
+        <span class="text-[11px] tracking-wider uppercase text-amber-400 font-bold bg-amber-400/10 px-2.5 py-1 rounded-md">AI ამოცნობა</span>
+        <h1 class="text-xl font-black tracking-tight mt-2">ფურცლის სკანირება</h1>
+      </div>
+      <button onclick="goBack()" class="text-xs text-slate-400 bg-slate-800 px-3 py-1.5 rounded-xl border border-slate-700 hover:text-white">უკან</button>
+    </header>
+  <!-- მთავარი სამუშაო სივრცე -->
+    <main class="p-5 flex-1 space-y-6 flex flex-col justify-center">
+
+      <!-- კამერის/ატვირთვის უზარმაზარი ზონა -->
+      <div id="uploadArea" class="border-2 border-dashed border-slate-700 hover:border-amber-500 rounded-3xl p-8 text-center bg-slate-800/40 transition-all cursor-pointer relative overflow-hidden group" onclick="simulateScanning()">
+        <input type="file" id="fileInput" accept="image/*" class="hidden" onchange="handleFileSelect(event)">
+        
+        <div class="space-y-4">
+          <div class="w-20 h-20 bg-amber-500/10 text-amber-400 rounded-2xl mx-auto flex items-center justify-center text-4xl group-hover:scale-110 transition-transform border border-amber-500/30">
+            📸
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-white">გადაიღეთ ან ატვირთეთ ფურცელი</h3>
+            <p class="text-xs text-slate-400 mt-1">ხელნაწერი ზომები და კრონკები ავტომატურად გაშიფროვდება</p>
+          </div>
+          <span class="inline-block bg-amber-500 text-slate-950 font-extrabold text-xs px-5 py-2.5 rounded-xl shadow-lg">
+            ფოტოს არჩევა
+          </span>
+        </div>
+      </div>
+
+      <!-- AI დამუშავების ანიმაცია (თავიდან დამალულია) -->
+      <div id="scanningState" class="hidden text-center space-y-5 p-6 bg-slate-800/80 rounded-3xl border border-slate-700">
+        <div class="w-16 h-16 border-4 border-amber-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <div>
+          <h3 class="text-base font-bold text-white">AI აანალიზებს ფურცელს...</h3>
+          <p class="text-xs text-slate-400 mt-1">მიმდინარეობს ზომების და მილიმეტრების ამოცნობა</p>
+        </div>
+      </div>
+
+      <!-- წარმატების შედეგი (თავიდან დამალულია) -->
+      <div id="resultState" class="hidden space-y-4">
+        <div class="p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl flex items-center gap-3">
+          <span class="text-2xl">✅</span>
+          <div>
+            <h4 class="text-sm font-bold text-emerald-400">ზომები წარმატებით ამოიცნო!</h4>
+            <p class="text-[11px] text-slate-400">ნაპოვნია 3 დეტალი და კრონკის მითითებები</p>
+          </div>
+        </div>
+
+        <!-- ამოცნობილი დეტალების მოკლე ცხრილი -->
+        <div class="bg-slate-800 rounded-2xl p-4 border border-slate-700 space-y-2 text-xs">
+          <div class="flex justify-between text-slate-400 font-bold pb-2 border-b border-slate-700">
+            <span>ზომა (მმ)</span>
+            <span>რაოდენობა</span>
+            <span>კრონკა</span>
+          </div>
+          <div class="flex justify-between text-slate-200 font-semibold py-1">
+            <span>720 × 450</span>
+            <span>2 ცალი</span>
+            <span class="text-amber-400">0.8 მმ</span>
+          </div>
+          <div class="flex justify-between text-slate-200 font-semibold py-1">
+            <span>580 × 300</span>
+            <span>1 ცალი</span>
+            <span class="text-amber-400">არ აქვს</span>
+          </div>
+        </div>
+
+        <button onclick="resetUpload()" class="w-full py-3.5 bg-slate-800 text-slate-300 font-bold rounded-2xl border border-slate-700 hover:text-white text-xs">
+          სხვა ფოტოს ატვირთვა
+        </button>
+      </div>
+
+    </main>
+
+    <!-- ქვედა ნავიგაცია -->
+    <nav class="bg-slate-900 border-t border-slate-800 p-3 px-6 flex justify-around items-center">
+      <button class="flex flex-col items-center text-amber-400 font-bold text-xs gap-1">
+        <span class="text-xl">➕</span>
+        <span>შექმნა</span>
+      </button>
+      <button class="flex flex-col items-center text-slate-500 hover:text-slate-300 font-bold text-xs gap-1">
+        <span class="text-xl">📋</span>
+        <span>არქივი</span>
+      </button>
+      <button class="flex flex-col items-center text-slate-500 hover:text-slate-300 font-bold text-xs gap-1">
+        <span class="text-xl">⚙️</span>
+        <span>პარამეტრები</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <script>
+    function simulateScanning() {
+      // ვრთავთ სკანირების ანიმაციას
+      document.getElementById('uploadArea').classList.add('hidden');
+      document.getElementById('scanningState').classList.remove('hidden');
+
+      // 2 წამის შემდეგ ვურჩევთ შედეგის ჩვენებას (მოგვიანებით აქ ჩაჯდება რეალური OpenAI Vision API)
+      setTimeout(() => {
+        document.getElementById('scanningState').classList.add('hidden');
+        document.getElementById('resultState').classList.remove('hidden');
+      }, 2000);
+    }
+
+    function resetUpload() {
+      document.getElementById('resultState').classList.add('hidden');
+      document.getElementById('uploadArea').classList.remove('hidden');
+    }
+
+    function goBack() {
+      alert('მთავარ გვერდზე დაბრუნება');
+    }
+  </script>
+</body>
+</html>
