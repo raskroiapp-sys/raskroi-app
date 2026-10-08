@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ka">
 <head>
@@ -8,86 +9,93 @@
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     body { font-family: 'Noto Sans Georgian', sans-serif; -webkit-tap-highlight-color: transparent; }
-    .logo-gradient-border {
-      background: linear-gradient(135deg, rgba(56, 189, 248, 0.4), rgba(245, 158, 11, 0.4));
+    
+    /* ნეონის განათების და გრადიენტის ეფექტები (იასამნისფერი, ვარდისფერი, მწვანე) */
+    .neon-border {
+      background: linear-gradient(135deg, #a855f7, #ec4899, #10b981);
+      padding: 2px;
+      border-radius: 24px;
+    }
+    .neon-glow {
+      box-shadow: 0 10px 25px -5px rgba(168, 85, 247, 0.25), 0 8px 10px -6px rgba(236, 72, 153, 0.2);
     }
   </style>
 </head>
-<body class="bg-[#090D16] text-slate-100 min-h-screen flex justify-center items-start p-0 sm:p-4">
+<body class="bg-slate-100 text-slate-800 min-h-screen flex justify-center items-start p-0 sm:p-4">
 
   <!-- მობილურის ეკრანის კონტეინერი -->
-  <div class="w-full max-w-md bg-[#0D1322] min-h-screen sm:min-h-[844px] shadow-2xl flex flex-col justify-between sm:rounded-3xl overflow-hidden border border-slate-800/80">
+  <div class="w-full max-w-md bg-white min-h-screen sm:min-h-[844px] shadow-2xl flex flex-col justify-between sm:rounded-3xl overflow-hidden border border-slate-200">
     
     <!-- ზედა ჰედერი -->
-    <header class="bg-[#0D1322] text-white p-5 pt-8 border-b border-slate-800/80">
+    <header class="bg-white text-slate-900 p-5 pt-8 border-b border-slate-100">
       <div class="flex items-center justify-between mb-2">
         <div>
-          <span class="text-[11px] tracking-wider uppercase text-cyan-400 font-bold bg-cyan-500/10 px-2.5 py-1 rounded-md border border-cyan-500/20">Smart Raskroi AI</span>
-          <h1 class="text-2xl font-black tracking-tight mt-2 text-white">აირჩიეთ რეჟიმი</h1>
+          <span class="text-[11px] tracking-wider uppercase text-purple-600 font-extrabold bg-purple-50 px-2.5 py-1 rounded-md border border-purple-100">Smart Raskroi AI</span>
+          <h1 class="text-2xl font-black tracking-tight mt-2 text-slate-900">აირჩიეთ რეჟიმი</h1>
         </div>
-        <!-- ლოგოს ფერების შთაგონებით შექმნილი ავატარი -->
-        <div class="w-13 h-13 p-0.5 rounded-2xl logo-gradient-border shadow-lg flex items-center justify-center">
-          <div class="w-full h-full bg-[#0D1322] rounded-[14px] flex items-center justify-center font-black text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 to-amber-400 text-lg">
+        <!-- ლოგოს ნეონ-გრადიენტული ავატარი -->
+        <div class="p-0.5 rounded-2xl bg-gradient-to-tr from-purple-500 via-pink-500 to-emerald-400 shadow-md">
+          <div class="w-12 h-12 bg-white rounded-[14px] flex items-center justify-center font-black text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-pink-600 text-base">
             AI
           </div>
         </div>
       </div>
-      <p class="text-xs text-slate-400 font-medium">სად გსურთ მუშაობის გაგრძელება?</p>
+      <p class="text-xs text-slate-500 font-medium">სად გსურთ მუშაობის გაგრძელება?</p>
     </header>
 
     <!-- მთავარი სამუშაო სივრცე: რეჟიმების არჩევანი -->
-    <main class="p-5 flex-1 space-y-4 flex flex-col justify-center">
+    <main class="p-5 flex-1 space-y-5 flex flex-col justify-center">
 
-      <!-- ბარათი 1: ხელოსანი / საამქრო (ქარვასლისფერი აქცენტით) -->
-      <div onclick="selectMode('workshop')" class="group p-5 bg-[#131B31]/80 border-2 border-amber-500/50 hover:border-amber-400 rounded-3xl cursor-pointer transition-all shadow-xl relative overflow-hidden active:scale-98">
-        <div class="absolute top-0 right-0 bg-gradient-to-l from-amber-500 to-amber-600 text-slate-950 font-black text-[10px] px-3.5 py-1 rounded-bl-xl uppercase tracking-wider">
+      <!-- ბარათი 1: ხელოსანი / საამქრო (იასამნისფერი და ვარდისფერი ნეონით) -->
+      <div onclick="selectMode('workshop')" class="group p-5 bg-gradient-to-br from-white to-purple-50/50 border-2 border-purple-200 hover:border-purple-500 rounded-3xl cursor-pointer transition-all neon-glow relative overflow-hidden active:scale-98">
+        <div class="absolute top-0 right-0 bg-gradient-to-l from-purple-600 to-pink-500 text-white font-black text-[10px] px-3.5 py-1 rounded-bl-xl uppercase tracking-wider shadow-sm">
           ოსტატებისთვის
         </div>
         <div class="flex items-center gap-4">
-          <div class="w-14 h-14 bg-amber-500/15 text-amber-400 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform border border-amber-500/30">
+          <div class="w-14 h-14 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform border border-purple-200">
             🔨
           </div>
           <div>
-            <h3 class="text-lg font-black text-white">საამქროს რეჟიმი</h3>
-            <p class="text-xs text-slate-400 mt-1">სწრაფი ზომები, ფოტო სკანირება და ხმოვანი კარნახი</p>
+            <h3 class="text-lg font-black text-slate-900">საამქროს რეჟიმი</h3>
+            <p class="text-xs text-slate-500 mt-1">სწრაფი ზომები, ფოტო სკანირება და ხმოვანი კარნახი</p>
           </div>
         </div>
       </div>
 
-      <!-- ბარათი 2: ბიზნესი / ოფისი (ნეონ-ცისფერი AI აქცენტით) -->
-      <div onclick="selectMode('business')" class="group p-5 bg-[#131B31]/80 border-2 border-cyan-500/50 hover:border-cyan-400 rounded-3xl cursor-pointer transition-all shadow-xl relative overflow-hidden active:scale-98">
-        <div class="absolute top-0 right-0 bg-gradient-to-l from-cyan-500 to-blue-600 text-slate-950 font-black text-[10px] px-3.5 py-1 rounded-bl-xl uppercase tracking-wider">
+      <!-- ბარათი 2: ბიზნესი / ოფისი (მწვანე და საფირონის ნეონით) -->
+      <div onclick="selectMode('business')" class="group p-5 bg-gradient-to-br from-white to-emerald-50/50 border-2 border-emerald-200 hover:border-emerald-500 rounded-3xl cursor-pointer transition-all neon-glow relative overflow-hidden active:scale-98">
+        <div class="absolute top-0 right-0 bg-gradient-to-l from-emerald-500 to-teal-600 text-white font-black text-[10px] px-3.5 py-1 rounded-bl-xl uppercase tracking-wider shadow-sm">
           ლიცენზირებული
         </div>
         <div class="flex items-center gap-4">
-          <div class="w-14 h-14 bg-cyan-500/15 text-cyan-400 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform border border-cyan-500/30">
+          <div class="w-14 h-14 bg-emerald-100 text-emerald-600 rounded-2xl flex items-center justify-center text-3xl group-hover:scale-110 transition-transform border border-emerald-200">
             📊
           </div>
           <div>
-            <h3 class="text-lg font-black text-white">ბიზნესი / ოფისი</h3>
-            <p class="text-xs text-slate-400 mt-1">შეკვეთების არქივი, სტატუსები და ხარჯთაღრიცხვა</p>
+            <h3 class="text-lg font-black text-slate-900">ბიზნესი / ოფისი</h3>
+            <p class="text-xs text-slate-500 mt-1">შეკვეთების არქივი, სტატუსები და ხარჯთაღრიცხვა</p>
           </div>
         </div>
       </div>
 
       <!-- დინამიური კონტეინერი -->
-      <div id="dynamicContent" class="hidden p-4 bg-[#131B31] border border-slate-800 rounded-2xl text-center text-xs text-slate-300">
+      <div id="dynamicContent" class="hidden p-4 bg-slate-50 border border-slate-200 rounded-2xl text-center text-xs text-slate-600 shadow-inner">
         <!-- აქ ჩაიტვირთება შესაბამისი სამუშაო სივრცე -->
       </div>
 
     </main>
 
     <!-- ქვედა ნავიგაცია -->
-    <nav class="bg-[#0D1322] border-t border-slate-800/80 p-3 px-6 flex justify-around items-center">
-      <button class="flex flex-col items-center text-amber-400 font-bold text-xs gap-1">
+    <nav class="bg-white border-t border-slate-100 p-3 px-6 flex justify-around items-center shadow-sm">
+      <button class="flex flex-col items-center text-purple-600 font-bold text-xs gap-1">
         <span class="text-xl">➕</span>
         <span>შექმნა</span>
       </button>
-      <button class="flex flex-col items-center text-slate-500 hover:text-slate-300 font-bold text-xs gap-1">
+      <button class="flex flex-col items-center text-slate-400 hover:text-slate-600 font-bold text-xs gap-1">
         <span class="text-xl">📋</span>
         <span>არქივი</span>
       </button>
-      <button class="flex flex-col items-center text-slate-500 hover:text-slate-300 font-bold text-xs gap-1">
+      <button class="flex flex-col items-center text-slate-400 hover:text-slate-600 font-bold text-xs gap-1">
         <span class="text-xl">⚙️</span>
         <span>პარამეტრები</span>
       </button>
@@ -100,9 +108,9 @@
       const container = document.getElementById('dynamicContent');
       container.classList.remove('hidden');
       if(mode === 'workshop') {
-        container.innerHTML = '<span class="text-amber-400 font-bold">საამქროს რეჟიმი აქტიურია:</span> იხსნება სწრაფი კვეთების და სკანირების პანელი...';
+        container.innerHTML = '<span class="text-purple-600 font-bold">საამქროს რეჟიმი აქტიურია:</span> იხსნება სწრაფი კვეთების და სკანირების პანელი...';
       } else {
-        container.innerHTML = '<span class="text-cyan-400 font-bold">ბიზნეს რეჟიმი აქტიურია:</span> მოწმდება აქტიური სესია და ლიცენზია...';
+        container.innerHTML = '<span class="text-emerald-600 font-bold">ბიზნეს რეჟიმი აქტიურია:</span> მოწმდება აქტიური სესია და ლიცენზია...';
       }
     }
   </script>
