@@ -12,7 +12,6 @@
   <style>
     body { font-family: 'Noto Sans Georgian', sans-serif; -webkit-tap-highlight-color: transparent; transition: background-color 0.3s ease; }
     
-    /* ფოსფორისფერი მწვანე და ცისფერი მუსონური ნეონის ციალის ეფექტი */
     @keyframes auroraGlow {
       0% { border-color: #10b981; box-shadow: 0 0 15px rgba(16, 185, 129, 0.4), inset 0 0 10px rgba(16, 185, 129, 0.2); }
       50% { border-color: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), inset 0 0 15px rgba(59, 130, 246, 0.3); }
@@ -23,20 +22,15 @@
       border-width: 2px;
     }
 
-    .neon-card-light {
-      background: linear-gradient(135deg, #ffffff, #f8fafc);
-      box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.08);
-      border: 2px solid #e2e8f0;
+    /* დინამიური ველები: შეუსაბამო - წითელი, შევსებული - ფოსფორისფერი მწვანე */
+    .dynamic-input {
+      border: 2px solid #ef4444 !important; /* თავიდან წითელი */
       transition: all 0.2s ease;
     }
-    .neon-card-light:hover { border-color: #10b981; transform: translateY(-2px); }
-
-    .neon-card-dark {
-      background: #131B31;
-      border: 2px solid rgba(16, 185, 129, 0.3);
-      transition: all 0.2s ease;
+    .dynamic-input.filled {
+      border: 2px solid #10b981 !important; /* შევსებისას მწვანე */
+      background-color: rgba(16, 185, 129, 0.03);
     }
-    .neon-card-dark:hover { border-color: #10b981; transform: translateY(-2px); }
   </style>
 </head>
 <body class="bg-slate-100 dark:bg-[#090D16] text-slate-800 dark:text-slate-100 min-h-screen flex justify-center items-start p-0 sm:p-4">
@@ -51,11 +45,9 @@
       </div>
       
       <div class="flex items-center gap-2.5">
-        <!-- ლოგო ფოსფორისფერი მწვანე მუსონური ციალით -->
         <div class="w-11 h-11 rounded-2xl overflow-hidden aurora-neon-ring bg-slate-900 flex items-center justify-center shadow-md">
           <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=100&auto=format&fit=crop&q=60" alt="Logo" class="w-full h-full object-cover">
         </div>
-        <!-- თემის გადამრთველი -->
         <button onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 flex items-center justify-center text-lg shadow-sm hover:scale-105 transition-transform" title="თემის შეცვლა">
           <span id="themeIcon">🌙</span>
         </button>
@@ -68,10 +60,10 @@
       <!-- ეტაპი 1: საამქრო, მასალა და ნარჩენები -->
       <div id="step1Selection" class="space-y-3.5">
         
-        <!-- საამქროს სრულად ჩაწერადი ველი -->
+        <!-- საამქროს ველი (თავიდან წითელი, შევსებისას მწვანე) -->
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">1. საამქრო / კომპანია (ჩაწერეთ თავისუფლად ან აირჩიეთ)</label>
-          <input type="text" id="factoryInput" placeholder="მაგ: შპს შავნაბადა, ltb..." list="factoryList" class="w-full p-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-sm font-bold outline-none focus:border-emerald-500">
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">1. საამქრო / კომპანია (სავალდებულო)</label>
+          <input type="text" id="factoryInput" placeholder="მაგ: შპს შავნაბადა, ltb..." list="factoryList" oninput="validateInput(this)" class="w-full p-3 bg-slate-50 dark:bg-slate-900 rounded-2xl text-sm font-bold outline-none dynamic-input">
           <datalist id="factoryList">
             <option value="შპს შავნაბადა (ორთაჭალა)">
             <option value="LTB (ელითბი)">
@@ -80,9 +72,8 @@
           </datalist>
         </div>
 
-        <!-- მასალის და ფორმატის არჩევა ან ხელით ჩაწერა -->
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">2. მასალის ფორმატი (<span class="text-emerald-600 dark:text-emerald-400">იწერება მილიმეტრებში - მმ</span>)</label>
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-1.5">2. მასალის ფორმატი (<span class="text-emerald-600 dark:text-emerald-400">მილიმეტრებში - მმ</span>)</label>
           <select id="materialSelect" onchange="checkCustomMaterial(this)" class="w-full p-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl text-sm font-bold outline-none focus:border-emerald-500 mb-2">
             <option value="3660x2010">თურქული ლამინატი (3660 × 2010 მმ)</option>
             <option value="2800x2090">ავსტრიული ლამინატი (2800 × 2090 მმ)</option>
@@ -164,7 +155,7 @@
         </button>
       </div>
 
-      <!-- ეტაპი 3: შეკვეთის გაგზავნა -->
+      <!-- ეტაპი 3: შეკვეთის გაგზავნა (კოდის ველი წითელი/მწვანე დინამიკით) -->
       <div id="step3Finalize" class="hidden space-y-3">
         <div class="p-3 bg-emerald-50 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/50 rounded-2xl text-xs">
           <h4 class="font-black text-emerald-700 dark:text-emerald-400 mb-1">📋 შეკვეთის გაგზავნა საამქროში</h4>
@@ -172,8 +163,8 @@
         </div>
 
         <div>
-          <label class="block text-xs font-bold text-slate-400 mb-1">სიის სახელი / კოდი</label>
-          <input type="text" id="orderCode" placeholder="მაგ: კარადა #1 (SK-305)" class="w-full p-3 bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl text-sm outline-none focus:border-emerald-500 font-bold">
+          <label class="block text-xs font-bold text-slate-400 mb-1">სიის სახელი / კოდი (სავალდებულო)</label>
+          <input type="text" id="orderCode" placeholder="მაგ: კარადა #1 (SK-305)" oninput="validateInput(this)" class="w-full p-3 bg-slate-50 dark:bg-slate-900 rounded-xl text-sm outline-none font-bold dynamic-input">
         </div>
 
         <div>
@@ -224,6 +215,15 @@
       }
     }
 
+    // ველი წითელია როცა ცარიელია, ხოლო შევსებისას მწვანდება
+    function validateInput(input) {
+      if (input.value.trim().length > 0) {
+        input.classList.add('filled');
+      } else {
+        input.classList.remove('filled');
+      }
+    }
+
     function checkCustomMaterial(select) {
       const box = document.getElementById('customMaterialBox');
       if(select.value === 'custom') {
@@ -243,7 +243,13 @@
     }
 
     function proceedToInputMethods() {
-      const factory = document.getElementById('factoryInput').value || 'შპს შავნაბადა';
+      const factory = document.getElementById('factoryInput').value;
+      if(!factory.trim()) {
+        alert('გთხოვთ მიუთითოთ საამქრო / კომპანია!');
+        document.getElementById('factoryInput').focus();
+        return;
+      }
+
       const materialSelect = document.getElementById('materialSelect');
       let materialText = materialSelect.options[materialSelect.selectedIndex].text;
       
@@ -280,8 +286,9 @@
 
     function submitOrder() {
       const code = document.getElementById('orderCode').value;
-      if(!code) {
+      if(!code.trim()) {
         alert('გთხოვთ მიუთითოთ სიის სახელი ან კოდი!');
+        document.getElementById('orderCode').focus();
         return;
       }
       alert('შეკვეთა წარმატებით გაიგზავნა საამქროში! კოდი: ' + code);
