@@ -1,198 +1,21 @@
-<!DOCTYPE html>
-<html lang="ka" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>ჭკვიანი რასკროი - Smart Raskroi AI</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = { darkMode: 'class' }
-  </script>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;600;700;800&display=swap" rel="stylesheet">
-  <style>
-    /* მთლიანი ეკრანის ფონის მოძრავი ანიმაცია (მუშაობს როგორც მუქ, ისე ღია რეჟიმში) */
-    @keyframes gradientBG {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-    
-    body { 
-      font-family: 'Noto Sans Georgian', sans-serif; 
-      -webkit-tap-highlight-color: transparent; 
-      margin: 0;
-      min-height: 100vh;
-      background-size: 300% 300% !important;
-      animation: gradientBG 15s ease infinite;
-      transition: background-image 0.4s ease, color 0.4s ease;
-    }
+:root {
+  --bg-main:#080B18; --bg-sidebar:#0B1020;
+  --bg-card:#10162A; --bg-card-secondary:#151C33;
+  --text-primary:#F4F6FF; --text-secondary:#929BB8;
+  --border-color:#252D49; --success-color:#42D6A4;
+  --gradient-primary:linear-gradient(135deg,#4776FF 0%,#8657FF 55%,#D94CFF 100%);
+  --gradient-card:linear-gradient(145deg,#151C33 0%,#10162A 100%);
+}
+body{background:var(--bg-main);color:var(--text-primary)}
+.sidebar{background:var(--bg-sidebar)}
+.card,.panel{background:var(--gradient-card);border:1px solid var(--border-color)}
 
-    /* ღია რეჟიმის მოძრავი ფონი */
-    html:not(.dark) body {
-      background-image: linear-gradient(-45deg, #f8fafc, #d1fae5, #e0e7ff, #fae8ff, #f8fafc);
-    }
-
-    /* მუქი რეჟიმის მოძრავი ფონი (ნეონის მუსონური) */
-    html.dark body {
-      background-image: linear-gradient(-45deg, #020617, #022c22, #172554, #2e1065, #020617);
-    }
-    
-    /* აპლიკაციის ჩარჩოს მბრწყინავი ეფექტი */
-    @keyframes fullAppAurora {
-      0% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.4), inset 0 0 15px rgba(16, 185, 129, 0.1); border-color: rgba(16,185,129,0.6); }
-      33% { box-shadow: 0 0 40px rgba(59, 130, 246, 0.5), inset 0 0 20px rgba(59, 130, 246, 0.2); border-color: rgba(59,130,246,0.6); }
-      66% { box-shadow: 0 0 35px rgba(168, 85, 247, 0.4), inset 0 0 15px rgba(168, 85, 247, 0.1); border-color: rgba(168,85,247,0.6); }
-      100% { box-shadow: 0 0 30px rgba(16, 185, 129, 0.4), inset 0 0 15px rgba(16, 185, 129, 0.1); border-color: rgba(16,185,129,0.6); }
-    }
-
-    .aurora-app-frame {
-      animation: fullAppAurora 6s infinite linear;
-      border: 2px solid transparent;
-    }
-
-    /* AI სამფერი მოძრავი სხივი ლოგოზე */
-    .ai-beam-logo {
-      position: relative;
-      overflow: hidden;
-    }
-    .ai-beam-logo::before {
-      content: '';
-      position: absolute;
-      top: -100%; left: -100%; width: 300%; height: 300%;
-      background: linear-gradient(45deg, transparent 35%, rgba(16, 185, 129, 0.9) 45%, rgba(59, 130, 246, 0.9) 50%, rgba(168, 85, 247, 0.9) 55%, transparent 65%);
-      animation: aiSweep 3s infinite linear;
-      mix-blend-mode: screen;
-      pointer-events: none;
-    }
-    @keyframes aiSweep {
-      0% { transform: translateX(-50%) translateY(-50%) rotate(45deg); }
-      100% { transform: translateX(50%) translateY(50%) rotate(45deg); }
-    }
-
-    /* ველები: წითელიდან ფოსფორისფერ მწვანეზე */
-    .dynamic-input {
-      border: 2px solid #ef4444 !important;
-      transition: all 0.3s ease;
-    }
-    .dynamic-input.filled {
-      border: 2px solid #10b981 !important;
-      box-shadow: 0 0 12px rgba(16, 185, 129, 0.25);
-    }
-    html.dark .dynamic-input.filled { background-color: rgba(16, 185, 129, 0.05) !important; }
-    html:not(.dark) .dynamic-input.filled { background-color: rgba(16, 185, 129, 0.05) !important; }
-  </style>
-</head>
-<body class="text-slate-800 dark:text-slate-100 flex justify-center items-center p-0 sm:p-4">
-
-  <!-- მთავარი კონტეინერი -->
-  <div class="w-full max-w-md min-h-screen sm:min-h-[844px] shadow-2xl flex flex-col justify-between sm:rounded-3xl overflow-hidden aurora-app-frame bg-white/95 dark:bg-[#0D1322]/95 backdrop-blur-xl transition-colors duration-300">
-    
-    <!-- ზედა ჰედერი -->
-    <header class="p-5 pt-8 border-b border-slate-200 dark:border-white/10 flex items-center justify-between">
-      <div>
-        <span class="text-[11px] tracking-wider uppercase font-extrabold bg-emerald-100 dark:bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 px-2.5 py-1 rounded-md border border-emerald-200 dark:border-emerald-500/20">Smart Raskroi AI</span>
-        <h1 id="pageTitle" class="text-2xl font-black tracking-tight mt-2 text-[#10b981]">ზომების შეტანა</h1>
-        <p id="pageSubTitle" class="text-[11px] text-slate-500 dark:text-slate-400 font-medium mt-0.5">შეკვეთის მიცემის ფორმა / ზომების შეტანის მეთოდები</p>
-      </div>
-      
-      <div class="flex items-center gap-2.5">
-        <!-- ლოგო სამფერი მოძრავი სხივით -->
-        <div class="w-11 h-11 rounded-2xl ai-beam-logo flex items-center justify-center shadow-md bg-slate-900 border border-slate-700 dark:border-emerald-500/30">
-          <span class="text-lg font-black text-white relative z-10">AI</span>
-        </div>
-        
-        <!-- თემის გადამრთველი ღილაკი -->
-        <button type="button" onclick="toggleTheme()" class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800/80 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-300 dark:border-slate-700 flex items-center justify-center text-lg shadow-sm transition-transform active:scale-95" title="ფონის შეცვლა">
-          <span id="themeIcon">☀️</span>
-        </button>
-      </div>
-    </header>
-
-    <!-- მთავარი სამუშაო სივრცე -->
-    <main class="p-5 flex-1 space-y-4 flex flex-col justify-center">
-
-      <!-- ეტაპი 1: საამქრო, მასალა და ნარჩენები -->
-      <div id="step1Selection" class="space-y-3.5">
-        
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">1. საამქრო / კომპანია (სავალდებულო)</label>
-          <input type="text" id="factoryInput" placeholder="მაგ: შპს შავნაბადა, ltb..." list="factoryList" oninput="validateInput(this)" class="w-full p-3 bg-slate-50 dark:bg-slate-900/90 text-slate-900 dark:text-white rounded-2xl text-sm font-bold outline-none dynamic-input">
-          <datalist id="factoryList">
-            <option value="შპს შავნაბადა (ორთაჭალა)">
-            <option value="LTB (ელითბი)">
-            <option value="ჯეოლამი">
-            <option value="კავკასიის ლამინატი">
-          </datalist>
-        </div>
-
-        <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">2. მასალის ფორმატი (<span class="text-[#10b981]">მილიმეტრებში - მმ</span>)</label>
-          <select id="materialSelect" onchange="checkCustomMaterial(this)" class="w-full p-3 bg-slate-50 dark:bg-slate-900/90 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700/80 rounded-2xl text-sm font-bold outline-none focus:border-[#10b981] mb-2">
-            <option value="3660x2010">თურქული ლამინატი (3660 × 2010 მმ)</option>
-            <option value="2800x2090">ავსტრიული ლამინატი (2800 × 2090 მმ)</option>
-            <option value="2800x1220">MDF - მდფ (2800 × 1220 მმ)</option>
-            <option value="2800x2090hdf">HDF - დევეპე (2800 × 2090 მმ)</option>
-            <option value="custom">✏️ სხვა (საკუთარი ზომის მითითება)</option>
-          </select>
-
-          <div id="customMaterialBox" class="hidden grid grid-cols-2 gap-2">
-            <input type="number" id="customWidth" placeholder="სიგრძე (მმ)" class="p-3 bg-slate-50 dark:bg-slate-900/90 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl text-xs font-bold outline-none">
-            <input type="number" id="customHeight" placeholder="სიგანე (მმ)" class="p-3 bg-slate-50 dark:bg-slate-900/90 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700 rounded-xl text-xs font-bold outline-none">
-          </div>
-        </div>
-
-        <div class="grid grid-cols-2 gap-3">
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">კრონკი (სისქე)</label>
-            <select id="edgeSelect" class="w-full p-3 bg-slate-50 dark:bg-slate-900/90 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700/80 rounded-2xl text-sm font-bold outline-none focus:border-[#10b981]">
-              <option value="1mm">1 მმ</option>
-              <option value="2mm">2 მმ</option>
-              <option value="double">ორმაგი</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 dark:text-slate-400 mb-1.5">ცეხის ნარჩენი</label>
-            <select id="scrapToggle" onchange="toggleScrapInput(this)" class="w-full p-3 bg-slate-50 dark:bg-slate-900/90 text-slate-900 dark:text-white border border-slate-300 dark:border-slate-700/80 rounded-2xl text-sm font-bold outline-none focus:border-[#10b981]">
-              <option value="no">არ მაქვს</option>
-              <option value="yes">მაქვს ნარჩენი</option>
-            </select>
-          </div>
-        </div>
-
-        <div id="scrapBox" class="hidden p-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-2xl space-y-2">
-          <label class="block text-[11px] font-bold text-emerald-600 dark:text-emerald-400">მიუთითეთ ნარჩენი პანელის ზომები (მმ):</label>
-          <div class="grid grid-cols-2 gap-2">
-            <input type="text" placeholder="მაგ: 1000 x 500" class="p-2.5 bg-white dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-xs outline-none font-bold">
-            <input type="text" placeholder="რაოდენობა (ც)" class="p-2.5 bg-white dark:bg-slate-900/90 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white rounded-xl text-xs outline-none font-bold">
-          </div>
-        </div>
-
-        <button onclick="proceedToInputMethods()" class="w-full py-3.5 bg-gradient-to-r from-emerald-500 to-teal-600 text-white font-black rounded-2xl text-sm shadow-lg transition-all active:scale-98 mt-2">
-          შემდეგი ➔ ზომების შეტანა
-        </button>
-      </div>
-
-      <!-- ეტაპი 2: ზომების შეტანის მეთოდები -->
-      <div id="step2Methods" class="hidden space-y-3">
-        <div class="p-3 bg-emerald-50 dark:bg-emerald-500/10 border border-emerald-200 dark:border-emerald-500/20 rounded-2xl mb-1 flex items-center justify-between text-xs">
-          <span id="summaryParams" class="font-bold text-emerald-700 dark:text-emerald-400">პარამეტრები...</span>
-          <button onclick="backToStep1()" class="text-slate-500 dark:text-slate-400 underline font-bold">← უკან</button>
-        </div>
-
-        <button onclick="openOrderFinalizer()" class="w-full p-4 bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/70 hover:border-[#10b981] rounded-2xl shadow-sm flex items-center gap-4 text-left transition-all active:scale-98">
-          <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-xl flex items-center justify-center text-2xl border border-transparent dark:border-emerald-500/20">📸</div>
-          <div>
-            <h5 class="font-extrabold text-sm text-slate-900 dark:text-white">ფოტოს სკანირება / ატვირთვა</h5>
-            <p class="text-xs text-slate-500 dark:text-slate-400">ხელნაწერი ფურცლის ავტომატური დამუშავება</p>
-          </div>
-        </button>
-
-        <button onclick="openOrderFinalizer()" class="w-full p-4 bg-slate-50 dark:bg-slate-900/80 border border-slate-200 dark:border-slate-700/70 hover:border-[#10b981] rounded-2xl shadow-sm flex items-center gap-4 text-left transition-all active:scale-98">
-          <div class="w-12 h-12 bg-emerald-100 dark:bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 rounded-xl flex items-center justify-center text-2xl border border-transparent dark:border-emerald-500/20">🎙️</div>
-          <div>
-            <h5 class="font-extrabold text-sm text-slate-900 dark:text-white">ხმოვანი კარნახი</h5>
-            <p class="text-xs text-slate-500 dark:text-slate-400">უკარნახეთ ზომები მილიმეტრით</p>
-          </div>
-        </button>
-
-        <button onclick="openOrderFinalizer()" class="w-full
+/* Slow, subtle motion on existing gradient elements only */
+.hero,.btn-primary,.nav-item.active{
+  background-size:200% 200%;
+  animation:aurora 16s ease-in-out infinite;
+}
+@keyframes aurora{0%,100%{background-position:0% 50%}50%{background-position:100% 50%}}
+@media (prefers-reduced-motion:reduce){
+  .hero,.btn-primary,.nav-item.active{animation:none}
+}
