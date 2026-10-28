@@ -1,42 +1,312 @@
-/* ცენტრალიზებული დიზაინ-სისტემა (მაღალი კონტრასტით) */
-    :root {
-      /* ფონები - ბევრად უფრო მუქი, თითქმის შავი */
-      --bg-primary: #010308;
-      --bg-secondary: #020611;
-      --bg-sidebar: #02050E;
-      --bg-panel: rgba(4, 10, 24, 0.85);
-      --bg-card: #050E21;
-      --bg-card-hover: #081636;
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Raskroi AI</title>
+<script src="https://cdn.tailwindcss.com/3.4.17"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#050819;--bg2:#0A1428;--side:#0A1428;--card:#0A1428;--hover:#1A2436;
+--bd:rgba(110,140,200,.22);--bd-blue:rgba(255,138,61,.6);
+--t1:#F4F7FF;--t2:#A8B8D8;--t3:#7185AC;
+--cyan:#8FB4FF;--blue:#087BFF;--purple:#762BFF;--pink:#FF28C8;
+--ok:#00E6B8;--warn:#FFBE55;
+--g1:linear-gradient(100deg,#FF9A4D 0%,#FF8A3D 45%,#F2552E 100%);
+--gv:linear-gradient(135deg,#FFA64D 0%,#FF8A3D 50%,#F2552E 100%);
+--gp:linear-gradient(145deg,rgba(26,36,54,.92),rgba(10,20,40,.96))}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{font-family:'Noto Sans Georgian',system-ui,-apple-system,sans-serif;color:var(--t1);
+background:radial-gradient(ellipse at 85% 0,rgba(40,90,200,.28),transparent 42%),radial-gradient(ellipse at 0 100%,rgba(255,138,61,.12),transparent 40%),var(--bg);
+background-attachment:fixed;overflow-x:hidden}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+:focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
+.panel{background:var(--gp);border:1px solid var(--bd);border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 12px 32px rgba(0,0,0,.2);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.sub{background:rgba(2,11,36,.85);border:1px solid var(--bd);border-radius:14px;transition:.25s}
+.sub:hover{background:var(--hover);border-color:var(--bd-blue);box-shadow:0 0 22px rgba(255,138,61,.14)}
+.grad{background:var(--g1);background-size:200% 200%;animation:aur 16s ease-in-out infinite}
+@keyframes aur{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:999px;font-weight:600;font-size:14px;min-height:44px;color:#fff;box-shadow:0 0 22px rgba(255,138,61,.3)}
+.muted{color:var(--t3);font-size:12px}.sec{color:var(--t2)}
+.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+.side{background:var(--side);border-right:1px solid var(--bd);padding:20px 16px;display:flex;flex-direction:column;gap:6px;position:sticky;top:0;height:100vh}
+.nav{display:flex;align-items:center;gap:12px;padding:11px 14px;border-radius:12px;color:var(--t2);font-size:14px;text-align:left;width:100%;transition:.2s}
+.nav:hover{background:rgba(13,35,66,.7);color:#fff}
+.nav.on{color:#fff;background:var(--g1);background-size:200% 200%;animation:aur 16s ease-in-out infinite;box-shadow:var(--glow,0 0 24px rgba(255,138,61,.3))}
+.logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px}
+.logo b{background:var(--g1);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hex{width:34px;height:34px;border-radius:10px;background:var(--gv);display:grid;place-items:center;box-shadow:0 0 18px rgba(255,138,61,.5)}
+.main{padding:18px 24px 40px;min-width:0}
+.top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.search{flex:1;display:flex;align-items:center;gap:10px;padding:0 16px;height:44px;border-radius:14px;background:rgba(0,3,24,.9);border:1px solid var(--bd);color:var(--t3)}
+.search input{flex:1;background:none;border:0;color:var(--t1);font:inherit;font-size:14px;outline:0;min-width:0}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px}
+.stack{display:flex;flex-direction:column;gap:18px;min-width:0}
+.hero{position:relative;overflow:hidden;padding:28px;min-height:200px;background:radial-gradient(ellipse at 78% 60%,rgba(255,138,61,.28),transparent 55%),linear-gradient(135deg,#1A2436,#050819 70%);border-color:var(--bd-blue)}
+.hero h1{font-size:28px;font-weight:700;margin:0 0 8px}
+.hero .cube{position:absolute;right:30px;top:24px;width:190px;height:150px;opacity:.95}
+.checks{position:absolute;right:16px;bottom:16px;background:rgba(3,8,23,.75);border:1px solid var(--bd);border-radius:12px;padding:8px 12px;font-size:12px;display:grid;gap:3px;color:var(--cyan)}
+.modes{display:grid;grid-template-columns:1.5fr repeat(3,1fr);gap:12px;padding:14px}
+.mode{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:14px 8px;font-size:13px;min-height:100px}
+.mic{position:relative;width:72px;height:72px;border-radius:50%;display:grid;place-items:center;background:radial-gradient(circle,#2a1a14,#0A1428);border:2px solid transparent;background-clip:padding-box;box-shadow:0 0 0 2px #FF8A3D,0 0 24px rgba(255,138,61,.35);animation:pulse 4s ease-in-out infinite}
+.mic::before,.mic::after{content:"";position:absolute;border-radius:50%;border:1px solid;inset:-12px;border-color:rgba(255,138,61,.45)}
+.mic::after{inset:-22px;border-color:rgba(255,138,61,.28)}
+@keyframes pulse{50%{box-shadow:0 0 0 2px #FF6A2D,0 0 40px rgba(255,138,61,.4)}}
+.wave{display:flex;gap:3px;align-items:center;height:30px}
+.wave i{width:3px;height:6px;border-radius:2px;background:var(--g1);transition:.2s}
+.listening .wave i{animation:bar 1s ease-in-out infinite}
+.wave i:nth-child(2n){animation-delay:.2s!important}.wave i:nth-child(3n){animation-delay:.4s!important}
+@keyframes bar{50%{height:28px}}
+.row{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.h{font-size:16px;font-weight:600}
+.link{color:var(--cyan);font-size:12px;display:inline-flex;gap:4px;align-items:center;min-height:32px}
+.pcards{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.pc{padding:14px;text-align:left;width:100%}
+.thumb{width:48px;height:56px;border-radius:6px;background:#e9edf5;display:grid;place-items:center}
+.thumb svg{stroke:#51607e;width:36px;height:42px}
+.badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:12px;border:1px solid}
+.b-ok{color:var(--ok);border-color:rgba(0,230,184,.5);background:rgba(0,230,184,.1)}
+.b-pr{color:#4db2ff;border-color:rgba(8,123,255,.6);background:rgba(8,123,255,.12)}
+.b-dr{color:#d18bff;border-color:rgba(255,138,61,.6);background:rgba(255,138,61,.18)}
+.q{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 16px}
+.q button{padding:12px;text-align:left;font-size:13px;display:flex;flex-direction:column;gap:6px}
+.mats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 14px 14px}
+.mat{padding:6px;text-align:left;font-size:11px;display:block;width:100%}
+.mimg{height:48px;border-radius:8px;margin-bottom:6px}
+.chips{display:flex;gap:6px;padding:0 14px 10px;overflow-x:auto}
+.chip{padding:4px 12px;border-radius:999px;font-size:12px;border:1px solid var(--bd);color:var(--t2);white-space:nowrap;min-height:30px}
+.chip.on{background:var(--g1);color:#fff;border-color:transparent}
+.cta{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 20px;border-color:var(--bd-blue)}
+.promo{display:none;padding:14px;background:linear-gradient(120deg,#071A4D,#2C23AA);border-radius:16px;display:flex;gap:12px;align-items:center;font-size:13px}
+.aic{margin-top:auto;padding:14px;display:grid;gap:8px;font-size:13px;background:radial-gradient(ellipse at 80% 0,rgba(255,138,61,.55),transparent 65%),linear-gradient(160deg,#2a1a14,#0A1428)}
+.mtop,.mnav{display:none}
+.ov{position:fixed;inset:0;z-index:200;background:rgba(3,8,23,.8);display:none;place-items:center;padding:16px;backdrop-filter:blur(6px)}
+.ov.show{display:grid}
+.dlg{width:min(480px,100%);max-height:88vh;overflow:auto;padding:22px;border-color:var(--bd-blue)}
+.dlg input,.dlg textarea{width:100%;background:rgba(3,8,23,.7);border:1px solid var(--bd);border-radius:10px;padding:10px 12px;color:var(--t1);font:inherit;margin:8px 0}
+.stepbar{display:flex;gap:4px;margin:12px 0}.stepbar i{flex:1;height:4px;border-radius:2px;background:var(--bd)}.stepbar i.on{background:var(--g1)}
+.opt{display:block;width:100%;text-align:left;padding:11px 14px;margin:6px 0;min-height:44px}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:300;padding:10px 18px;border-radius:999px;background:#0D2342;border:1px solid var(--bd-blue);font-size:13px;opacity:0;pointer-events:none;transition:.3s}
+.toast.show{opacity:1}
+.tr{display:none}
+@media(max-width:1180px){.cols{grid-template-columns:1fr}.right{display:grid;grid-template-columns:1fr 1fr;gap:18px}.right>*:first-child{grid-column:1/-1}}
+@media(max-width:1000px){.app{grid-template-columns:76px 1fr}.side .tx,.side .aic,.side .logo span{display:none}.nav{justify-content:center;padding:12px}}
+@media(max-width:767px){
+.app{display:block}.side,.top{display:none}
+.mtop{display:flex;align-items:center;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) 16px 8px;position:sticky;top:0;z-index:50;background:rgba(5,8,25,.92);backdrop-filter:blur(14px)}
+.main{padding:8px 14px calc(110px + env(safe-area-inset-bottom))}
+.mtop .search{display:none;position:absolute;left:12px;right:12px;top:100%;margin-top:6px}.mtop .search.show{display:flex}
+.hero{padding:18px;min-height:170px}.hero h1{font-size:21px}.hero .cube{width:110px;height:90px;right:6px;top:10px;opacity:.7}.checks{display:none}
+.modes{grid-template-columns:repeat(3,1fr);padding:10px}.modes .vm{grid-column:1/-1}
+.pcards{grid-template-columns:1fr}.right{display:flex;flex-direction:column}
+.cta{flex-direction:column;align-items:stretch;text-align:center}
+.mnav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;position:fixed;left:0;right:0;bottom:0;z-index:100;padding:10px 8px calc(10px + env(safe-area-inset-bottom));background:rgba(5,8,25,.96);border-top:1px solid rgba(255,138,61,.3);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.mnav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--t3);min-height:48px;justify-content:center}
+.mnav button.on{color:#FF8A3D}
+.mnav .ai{width:60px;height:60px;border-radius:50%;margin:-30px auto 0;background:var(--gv);color:#fff;display:grid;place-items:center;box-shadow:0 0 28px rgba(255,138,61,.6),0 0 0 4px var(--bg)}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
-      /* ჩარჩოები - ნაკლები სითეთრე */
-      --border-subtle: rgba(0, 174, 255, 0.15);
-      --border-blue: rgba(0, 174, 255, 0.4);
-      --border-glow: rgba(118, 43, 255, 0.5);
+.modes{display:block;padding:14px}.tabs{display:grid;grid-template-columns:1.2fr 1fr 1fr;gap:12px}.tab{display:flex;align-items:center;justify-content:center;gap:8px;min-height:48px;border-radius:12px;font-size:14px;color:#fff}
+.vbox{display:flex;flex-direction:column;align-items:center;gap:10px;padding:22px 0 6px}.pill{padding:10px 22px;border-radius:999px;border:1px solid var(--bd);background:rgba(5,8,25,.7);font-size:13px;color:var(--t2);text-align:center}
+.mic{width:88px;height:88px}.wave i{background:#FF8A3D}.listening .wave i{animation-duration:.9s}
+.feat{display:flex;align-items:center;gap:16px;padding:14px 18px;flex-wrap:wrap}.fi{display:flex;gap:10px;align-items:center;flex:1;font-size:13px;min-width:120px}.fi svg{color:#FF8A3D}
+.banner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px;font-size:13px;background:linear-gradient(90deg,rgba(122,74,34,.55),rgba(10,20,40,.9) 55%),repeating-linear-gradient(100deg,#5e3818 0 6px,#6e4420 6px 12px)}
+.mimg{background-image:repeating-linear-gradient(90deg,rgba(0,0,0,.09) 0 2px,transparent 2px 8px)!important}
+.hex{background:linear-gradient(135deg,#FFA64D,#E0481E)}.search{border-radius:22px}
+.checks{color:#fff}.link{color:#8FB4FF}.chip.on{color:#1A0E05}
+@media(max-width:767px){.vbox{display:none}.modes{padding:10px}.tabs{grid-template-columns:repeat(3,1fr)}.tab{flex-direction:column;min-height:72px;font-size:12px}.banner,.feat{flex-direction:column;align-items:stretch;text-align:center}.mnav .ai{background:var(--gv)}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute"><defs>
+<symbol id="home" viewBox="0 0 24 24"><path d="M3 11l9-8 9 8M5 10v10h14V10"/></symbol>
+<symbol id="list" viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 8h6M9 12h6M9 16h4"/></symbol>
+<symbol id="up" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 16V8M8 11l4-4 4 4"/></symbol>
+<symbol id="cog" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></symbol>
+<symbol id="box" viewBox="0 0 24 24"><path d="M12 3l9 5v8l-9 5-9-5V8zM3 8l9 5 9-5M12 13v8"/></symbol>
+<symbol id="db" viewBox="0 0 24 24"><ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v12c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+<symbol id="users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M2 20c0-4 3-6 7-6s7 2 7 6M16 4.5a3.5 3.5 0 010 7M22 20c0-3-1.5-5-4-5.8"/></symbol>
+<symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.5 3.5-7 8-7s8 2.5 8 7"/></symbol>
+<symbol id="mic" viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="12" rx="3"/><path d="M5 11a7 7 0 0014 0M12 18v4"/></symbol>
+<symbol id="cam" viewBox="0 0 24 24"><path d="M3 8h4l2-3h6l2 3h4v12H3z"/><circle cx="12" cy="13" r="4"/></symbol>
+<symbol id="doc" viewBox="0 0 24 24"><path d="M6 2h9l5 5v15H6zM14 2v6h6M9 13h8M9 17h8"/></symbol>
+<symbol id="plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="link" viewBox="0 0 24 24"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/></symbol>
+<symbol id="bell" viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0112 0v6l2 2H4zM10 21h4"/></symbol>
+<symbol id="srch" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></symbol>
+<symbol id="arr" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+<symbol id="chk" viewBox="0 0 24 24"><path d="M5 12l5 5 9-10"/></symbol>
+<symbol id="x" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6L6 18"/></symbol>
+<symbol id="plan" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M12 3v18M3 12h9M12 8h9"/></symbol>
+</defs></svg>
 
-      /* ტექსტი */
-      --text-primary: #FFFFFF;
-      --text-secondary: #92A3C4;
-      --text-muted: #5C6E94;
+<header class="mtop">
+ <button aria-label="ძიება" onclick="document.getElementById('ms').classList.toggle('show')"><svg class="i"><use href="#srch"/></svg></button>
+ <div class="logo" style="font-size:18px"><div class="hex" style="width:28px;height:28px"><svg class="i" style="width:16px"><use href="#box"/></svg></div>Raskroi <b>AI</b></div>
+ <button aria-label="შეტყობინებები" onclick="toast('ახალი შეტყობინებები არ არის')"><svg class="i"><use href="#bell"/></svg></button>
+ <label class="search" id="ms"><svg class="i"><use href="#srch"/></svg><input data-search placeholder="მოძებნე..."></label>
+</header>
 
-      /* ნეონის აქცენტები - მაქსიმალური სიკაშკაშე */
-      --neon-cyan: #00FFFF;
-      --neon-blue: #1A8CFF;
-      --neon-purple: #8A2BE2;
-      --neon-violet: #B026FF;
-      --neon-pink: #FF007F;
-      --success: #00FFB2;
+<div class="app">
+<aside class="side">
+ <div class="logo" style="margin-bottom:18px"><div class="hex"><svg class="i"><use href="#box"/></svg></div><span>Raskroi <b>AI</b></span></div>
+ <button class="nav on" data-go="home"><svg class="i"><use href="#home"/></svg><span class="tx">მთავარი</span></button>
+ <button class="nav" data-go="orders"><svg class="i"><use href="#list"/></svg><span class="tx">შეკვეთების მენეჯმენტი</span></button>
+ <button class="nav" data-go="upload"><svg class="i"><use href="#up"/></svg><span class="tx">ფაილის ატვირთვა</span></button>
+ <button class="nav" data-go="settings"><svg class="i"><use href="#cog"/></svg><span class="tx">პარამეტრები</span></button>
+ <button class="nav" data-go="off"><svg class="i"><use href="#box"/></svg><span class="tx">ჩემი ნარჩენები</span></button>
+ <button class="nav" data-go="db"><svg class="i"><use href="#db"/></svg><span class="tx">ნარჩენების ბაზა</span></button>
+ <button class="nav" data-go="users"><svg class="i"><use href="#users"/></svg><span class="tx">მომხმარებლების ბაზა</span></button>
+ <button class="nav" data-go="profile"><svg class="i"><use href="#user"/></svg><span class="tx">პროფილი</span></button>
+ <div class="panel aic">
+  <b>AI ასისტენტი</b><span class="muted">დაიწყე საუბარი და მე დაგეხმარები</span>
+  <button class="btn grad" style="justify-content:center" onclick="startVoice()"><svg class="i"><use href="#mic"/></svg>დაიწყე საუბარი</button>
+ </div>
+ <div class="muted" style="padding:8px 6px">ვერსია 1.0.0 · Raskroi AI</div>
+</aside>
 
-      /* გრადიენტები */
-      --gradient-primary: linear-gradient(115deg, #00FFFF 0%, #1A8CFF 30%, #8A2BE2 62%, #B026FF 82%, #FF007F 100%);
-      --gradient-voice: linear-gradient(135deg, #00FFFF 0%, #1A8CFF 40%, #8A2BE2 70%, #FF007F 100%);
-      --gradient-panel: linear-gradient(145deg, rgba(5, 12, 26, 0.9), rgba(2, 6, 14, 0.95));
-      
-      /* ნათება */
-      --glow-cyan: 0 0 20px rgba(0, 255, 255, 0.3);
-      --glow-purple: 0 0 25px rgba(138, 43, 226, 0.35);
-    }
+<main class="main">
+<div class="top">
+ <label class="search"><svg class="i"><use href="#srch"/></svg><input data-search placeholder="მოძებნე... (მაგალითად: დაფები, MDF, Geolami)"></label>
+ <button aria-label="შეტყობინებები" onclick="toast('ახალი შეტყობინებები არ არის')"><svg class="i"><use href="#bell"/></svg></button>
+ <button class="row" style="gap:10px" onclick="go('profile')"><span class="hex" style="border-radius:50%"><svg class="i"><use href="#user"/></svg></span>გიორგი</button>
+</div>
 
-    body {
-      font-family: 'Noto Sans Georgian', sans-serif;
-      background-color: var(--bg-primary);
-      color: var
+<div class="cols">
+<div class="stack">
+ <section class="panel hero">
+  <svg class="cube" viewBox="0 0 220 150" aria-hidden="true"><defs><pattern id="wg" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#c98f55"/><path d="M0 2h8M0 6h8" stroke="#a86f3c" stroke-width=".8"/></pattern></defs><path d="M20 100l80-24 100 22-80 30z" fill="url(#wg)"/><path d="M20 100v12l100 28v-12z" fill="#7a4a22"/><path d="M120 128v12l80-30v-12z" fill="#5e3818"/><path d="M60 70l70-22 70 18-70 22z" fill="url(#wg)"/><path d="M60 70v10l70 18v-10z" fill="#7a4a22"/><path d="M110 10h80v60h-80z" fill="rgba(143,180,255,.12)" stroke="#8FB4FF" stroke-width="1"/><path d="M120 22h30v20h-30zM155 22h28v38h-28z" fill="none" stroke="#8FB4FF" stroke-width=".8"/></svg>
+  <h1>ჭკვიანი რასკროი <span style="color:#FF8A3D">AI</span></h1>
+  <p style="font-weight:600;margin:0 0 6px">თქვენი იდეა — ჩვენი ტექნოლოგია!</p>
+  <p class="sec" style="max-width:360px;margin:0 0 16px;font-size:13px">AI ასისტენტი, რომელიც დაგეხმარებათ ბალიშებში, მასალისა და ნარჩენების ოპტიმიზაციაში.</p>
+  <button class="btn grad" onclick="startVoice()">ახალი შეკვეთა <svg class="i" style="width:16px"><use href="#arr"/></svg></button>
+  <div class="checks"><span>✓ სწრაფი</span><span>✓ ზუსტი</span><span>✓ ეკონომიური</span></div>
+ </section>
+
+ <section class="panel modes" id="modes">
+  <div class="tabs"><button class="tab grad" onclick="startVoice()"><svg class="i"><use href="#mic"/></svg>ხმოვანი შეყვანა</button><button class="tab sub" onclick="openMode('photo')"><svg class="i"><use href="#cam"/></svg>ფოტო</button><button class="tab sub" onclick="openMode('text')"><svg class="i"><use href="#doc"/></svg>ტექსტი</button></div>
+  <div class="vbox" id="voiceBox"><div class="row" style="gap:18px;justify-content:center"><div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div><button class="mic" onclick="startVoice()" aria-label="ხმოვანი რეჟიმი"><svg class="i" style="width:34px;height:34px"><use href="#mic"/></svg></button><div class="wave" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></div><b>მოვუსმენ...</b><div class="pill" id="vstate">მინდა რასკროი შავნაბადაში, 18 მმ, 375×282</div></div>
+ </section>
+
+ <section class="panel" style="padding:18px" id="orders">
+  <div class="row" style="margin-bottom:14px"><span class="h">ბოლო შეკვეთები</span><button class="link" onclick="toast('ყველა შეკვეთა ჩაიტვირთა')">ყველა შეკვეთა <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
+  <div class="pcards" id="projects"></div>
+ </section>
+
+ <section class="panel feat"><div class="fi"><svg class="i"><use href="#chk"/></svg><div><b>სწრაფი</b><div class="muted">გათვლა წამებში</div></div></div><div class="fi"><svg class="i"><use href="#chk"/></svg><div><b>უსაფრთხო</b><div class="muted">მონაცემები დაცულია</div></div></div><div class="fi"><svg class="i"><use href="#chk"/></svg><div><b>მარტივი</b><div class="muted">ინტუიციური გამოყენება</div></div></div><button class="btn grad" onclick="openMode('text')">შექმენი რასკროი <svg class="i" style="width:16px"><use href="#arr"/></svg></button></section>
+ <section class="panel banner"><div><b style="color:#FFA64D">თქვენი ნარჩენები — ახალი შესაძლებლობა</b><div class="muted">გამოიყენეთ ნარჩენები, დაზოგეთ მასალა და იმუშავეთ უფრო ეკონომიურად.</div></div><button class="btn sub" onclick="go('db')">ნარჩენების ბაზა <svg class="i" style="width:16px"><use href="#arr"/></svg></button></section>
+</div>
+
+<div class="stack right">
+ <section class="panel" id="quick"><div class="h" style="padding:16px">სწრაფი მოქმედებები</div>
+  <div class="q">
+   <button class="sub" onclick="startVoice()"><svg class="i" style="color:var(--cyan)"><use href="#mic"/></svg>ხმოვანი რეჟიმი<span class="muted">საუბარი → რასკროი</span></button>
+   <button class="sub" onclick="openMode('photo')"><svg class="i" style="color:var(--cyan)"><use href="#cam"/></svg>ფოტოთი ატვირთვა<span class="muted">ფოტო → დეტალები</span></button>
+   <button class="sub" onclick="openMode('doc')"><svg class="i" style="color:var(--cyan)"><use href="#doc"/></svg>დოკუმენტის შეყვანა<span class="muted">ზომები, მასალა...</span></button>
+   <button class="sub" onclick="openMode('text')"><svg class="i" style="color:var(--cyan)"><use href="#plus"/></svg>ახალი რასკროი<span class="muted">ხელით შეყვანა</span></button>
+  </div></section>
+
+ <section class="panel" id="off"><div class="row" style="padding:16px 16px 10px"><span class="h">ჩემი ნარჩენები</span><button class="link" onclick="document.getElementById('db').scrollIntoView({behavior:'smooth'})">ნარჩენები <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
+  <div class="chips" data-chips="off"></div><div class="mats" id="offList"></div></section>
+
+ <section class="panel" id="db"><div class="row" style="padding:16px 16px 10px"><span class="h">ნარჩენების ბაზა</span><button class="link" onclick="toast('ბაზა განახლდა')">ყველა <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
+  <div class="chips" data-chips="db"></div><div class="mats" id="dbList"></div></section>
+</div>
+</div>
+</main>
+</div>
+
+<nav class="mnav" aria-label="ძირითადი ნავიგაცია">
+ <button class="on" data-go="home"><svg class="i"><use href="#home"/></svg>მთავარი</button>
+ <button data-go="orders"><svg class="i"><use href="#list"/></svg>შეკვეთები</button>
+ <button class="ai" onclick="startVoice()" aria-label="AI ასისტენტი"><svg class="i" style="width:28px;height:28px"><use href="#mic"/></svg></button>
+ <button data-go="off"><svg class="i"><use href="#box"/></svg>ნარჩენები</button>
+ <button data-go="profile"><svg class="i"><use href="#user"/></svg>პროფილი</button>
+</nav>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true"><div class="panel dlg" id="dlg"></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const P=[{n:'შავნაბადა',d:'12.10.2025',s:'ok',t:'დამტკიცებულია'},{n:'LTBDS',d:'10.10.2025',s:'pr',t:'პროექტი'},{n:'Geolami',d:'08.10.2025',s:'dr',t:'შეყვანილი'}];
+const OFF=[{n:'ლამინატი',w:180,h:140,q:3,c:'#c98f55',k:'ლამინატი',note:'მუხის დეკორი'},{n:'MDF',w:120,h:80,q:3,c:'#8d8896',k:'MDF',note:'ნაცრისფერი'},{n:'ლამინატი',w:100,h:60,q:1,c:'#eef1f6',k:'ლამინატი',note:'თეთრი'}];
+const DB=[{n:'ლამინატი',w:200,h:120,q:100,c:'#a8845a',k:'ლამინატი',note:'თბილისი'},{n:'MDF',w:150,h:90,q:65,c:'#d9b58a',k:'MDF',note:'რუსთავი'},{n:'ლამინატი',w:120,h:80,q:45,c:'#8a6a45',k:'ლამინატი',note:'ქუთაისი'}];
+const F={off:'ყველა',db:'ყველა'};let Q='';
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.x);toast.x=setTimeout(()=>t.classList.remove('show'),2200)};
+const ic=i=>`<svg class="i" style="width:14px;height:14px"><use href="#${i}"/></svg>`;
+function render(){
+ $('#projects').innerHTML=P.filter(p=>p.n.toLowerCase().includes(Q)).map((p,i)=>`<button class="sub pc" data-p="${i}"><div class="row" style="justify-content:flex-start;gap:12px"><div class="thumb"><svg class="i"><use href="#plan"/></svg></div><div><b>${p.n}</b><div class="muted">${p.d}</div></div></div><div style="margin-top:12px"><span class="badge b-${p.s}">${ic(p.s=='ok'?'chk':'plan')}${p.t}</span></div></button>`).join('')||'<div class="muted">შეკვეთა ვერ მოიძებნა</div>';
+ [['off',OFF],['db',DB]].forEach(([k,a])=>{
+  const l=a.filter(m=>(F[k]=='ყველა'||m.k==F[k])&&(m.n+m.note+m.k+m.w+m.h).toLowerCase().includes(Q));
+  $('#'+k+'List').innerHTML=l.map(m=>`<button class="sub mat" data-m="${k}:${a.indexOf(m)}"><div class="mimg" style="background:linear-gradient(135deg,${m.c},${m.c}bb)"></div><b>${m.n}</b><div class="muted">${m.w} × ${m.h} სმ</div><div class="muted">${k=='db'?m.q+' ც · '+m.note:m.q+' ც'}</div></button>`).join('')||'<div class="muted" style="grid-column:1/-1">ვერაფერი მოიძებნა</div>';
+ });
+}
+$$('[data-chips]').forEach(c=>{const k=c.dataset.chips;c.innerHTML=['ყველა','ლამინატი','MDF'].map(x=>`<button class="chip ${x=='ყველა'?'on':''}">${x}</button>`).join('');
+ c.onclick=e=>{if(!e.target.classList.contains('chip'))return;F[k]=e.target.textContent;$$('.chip',c);[...c.children].forEach(b=>b.classList.toggle('on',b==e.target));render()}});
+$$('[data-search]').forEach(i=>i.oninput=e=>{Q=e.target.value.trim().toLowerCase();$$('[data-search]').forEach(x=>x!==i&&(x.value=e.target.value));render()});
+document.addEventListener('click',e=>{
+ const p=e.target.closest('[data-p]'),m=e.target.closest('[data-m]');
+ if(p){const o=P[p.dataset.p];dlg(`<div class="h">${o.n}</div><p class="sec">თარიღი: ${o.d}<br>სტატუსი: ${o.t}</p><button class="btn grad" onclick="closeD();toast('პროექტი გაიხსნა')">გახსნა</button> <button class="btn" onclick="closeD()">დახურვა</button>`)}
+ if(m){const[k,i]=m.dataset.m.split(':'),o=(k=='off'?OFF:DB)[i];dlg(`<div class="mimg" style="height:90px;background:linear-gradient(135deg,${o.c},${o.c}bb)"></div><div class="h">${o.n} · ${o.note}</div><p class="sec">ზომა: ${o.w} × ${o.h} სმ<br>სისქე: 18 მმ<br>რაოდენობა: ${o.q} ც</p><button class="btn grad" onclick="closeD();toast('დაემატა რასკროიში')">რასკროიში დამატება</button> <button class="btn" onclick="closeD()">დახურვა</button>`)}
+ if(e.target.id=='ov')closeD();
+ const g=e.target.closest('[data-go]');if(g)go(g.dataset.go);
+});
+document.addEventListener('keydown',e=>e.key=='Escape'&&closeD());
+function dlg(h){$('#dlg').innerHTML=h;$('#ov').classList.add('show')}
+function closeD(){$('#ov').classList.remove('show');stopVoice()}
+function go(k){
+ $$('[data-go]').forEach(b=>b.classList.toggle('on',b.dataset.go==k));
+ const t={home:'modes',orders:'orders',off:'off',db:'db',upload:'modes'}[k];
+ if(t)($('#'+t)).scrollIntoView({behavior:'smooth',block:'start'});else{window.scrollTo({top:0,behavior:'smooth'});toast('ეს განყოფილება დემოში მალე დაემატება')}
+ if(k=='upload')openMode('doc');
+}
+/* Voice + guided flow */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;let rec=null;
+const STEPS=[
+ ['აირჩიე კომპანია',['შავნაბადა','LTBDS','Geolami']],
+ ['აირჩიე ფურცლის ფორმატი',['2800 × 2070','2750 × 1830']],
+ ['აირჩიე მასალა და დეკორი',['ლამინატი Egger U999','ლამინატი Kronospan K101','MDF 18 მმ']],
+ ['დეტალები (ზომა × რაოდენობა)',['A1 100×60 ×2','B1 50×40 ×2','C1 70×40 ×2']],
+ ['კრომკა',['ორმხრივი 2 მმ','მხოლოდ სიგრძე','კრომკის გარეშე']]];
+let W={i:0,v:[]};
+function startVoice(){
+ dlg(`<div class="h">ხმოვანი რეჟიმი</div><div id="vbody" class="sec" style="font-size:14px"></div>`);
+ vbody(`<div class="row" style="justify-content:center;margin:14px 0"><button class="mic" id="micb" aria-label="მიკროფონი"><svg class="i" style="width:30px;height:30px"><use href="#mic"/></svg></button></div><div class="wave" style="justify-content:center"><i></i><i></i><i></i><i></i><i></i></div><p id="tr" style="text-align:center;min-height:44px">${SR?'დააჭირე მიკროფონს და თქვი...':'ამ ბრაუზერში ხმის ამოცნობა მიუწვდომელია. შეიყვანე ტექსტი ხელით:'}</p><input id="ti" placeholder="მაგ.: მინდა რასკროი შავნაბადაში"><button class="btn grad" id="go">გაგრძელება</button>`);
+ $('#micb').onclick=listen;$('#go').onclick=()=>{const v=$('#ti').value.trim();if(!v)return toast('შეიყვანე ტექსტი');begin(v)};
+ if(SR)listen();
+}
+function vbody(h){$('#vbody').innerHTML=h}
+function listen(){
+ if(!SR)return toast('ხმის ამოცნობა მიუწვდომელია');
+ stopVoice();rec=new SR();rec.lang='ka-GE';rec.interimResults=true;
+ $('#dlg').classList.add('listening');$('#vstate').textContent='გისმენ...';
+ rec.onresult=e=>{const t=[...e.results].map(r=>r[0].transcript).join(' ');$('#tr').textContent=t;$('#ti').value=t;if(e.results[e.results.length-1].isFinal){$('#vstate').textContent='მუშავდება...';setTimeout(()=>begin(t),500)}};
+ rec.onerror=()=>{$('#dlg').classList.remove('listening');$('#tr').textContent='ვერ გავიგე. სცადე თავიდან ან შეიყვანე ხელით.'};
+ rec.onend=()=>$('#dlg').classList.remove('listening');
+ try{rec.start()}catch(e){}
+}
+function stopVoice(){try{rec&&rec.stop()}catch(e){}rec=null;$('#dlg').classList.remove('listening');$('#vstate').textContent='დააჭირე და თქვი: „მინდა რასკროი შავნაბადაში“'}
+function begin(t){W={i:0,v:[],t};const f=P.find(p=>t.toLowerCase().includes(p.n.toLowerCase()));if(f){W.v.push(f.n);W.i=1}step()}
+function step(){
+ const bar=`<div class="stepbar">${STEPS.map((_,i)=>`<i class="${i<=W.i?'on':''}"></i>`).join('')}</div>`;
+ if(W.i>=STEPS.length){
+  vbody(`${bar}<div class="h" style="margin-bottom:8px">შეამოწმე რასკროი</div>${STEPS.map((s,i)=>`<div class="row sub" style="padding:8px 12px;margin:4px 0"><span class="muted">${s[0]}</span><b>${W.v[i]||'—'}</b></div>`).join('')}<p class="muted">გათვლა არ დასრულდება, სანამ არ დაადასტურებ.</p><button class="btn grad" onclick="done()">დადასტურება</button> <button class="btn" onclick="W.i=0;W.v=[];step()">თავიდან</button>`);return}
+ const s=STEPS[W.i];
+ vbody(`${bar}<div class="h" style="margin-bottom:6px">${s[0]}</div>${s[1].map(o=>`<button class="sub opt" onclick="pick('${o}')">${o}</button>`).join('')}${W.i?'<button class="link" onclick="W.i--;W.v.pop();step()">უკან</button>':''}`);
+}
+function pick(o){W.v[W.i]=o;W.i++;step()}
+function done(){P.unshift({n:W.v[0]||'ახალი',d:new Date().toLocaleDateString('ka-GE').replace(/\//g,'.'),s:'dr',t:'შეყვანილი'});render();closeD();toast('რასკროი შენახულია')}
+/* Other input modes */
+function openMode(m){
+ const c={photo:['ფოტოთი ატვირთვა','<input type="file" id="f" accept="image/*" capture="environment">'],doc:['დოკუმენტის ატვირთვა','<input type="file" id="f" accept=".pdf,.doc,.docx,.xls,.xlsx,.txt">'],text:['ხელით შეყვანა','<textarea id="f" rows="4" placeholder="მაგ.: A1 100×60 ×2, B1 50×40 ×2"></textarea>']}[m];
+ dlg(`<div class="h">${c[0]}</div>${c[1]}<button class="btn grad" id="ok">შემდეგი</button> <button class="btn" onclick="closeD()">გაუქმება</button>`);
+ $('#ok').onclick=()=>{const f=$('#f');if(!(f.files?f.files.length:f.value.trim()))return toast('ჯერ შეავსე ველი');begin(f.files?'':f.value);}
+}
+render();
+</script>
+</body>
+</html>
