@@ -40,13 +40,13 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .logo b{background:var(--g1);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hex{width:34px;height:34px;border-radius:10px;background:var(--gv);display:grid;place-items:center;box-shadow:0 0 18px rgba(255,138,61,.5)}
 .main{padding:18px 24px 40px;min-width:0}
-.top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;background:rgba(10,20,40,.6);padding:12px 18px;border-radius:14px;border:1px solid var(--bd)}
 .search{flex:1;display:flex;align-items:center;gap:10px;padding:0 16px;height:44px;border-radius:14px;background:rgba(0,3,24,.9);border:1px solid var(--bd);color:var(--t3)}
 .search input{flex:1;background:none;border:0;color:var(--t1);font:inherit;font-size:14px;outline:0;min-width:0}
 .cols{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px}
 .stack{display:flex;flex-direction:column;gap:18px;min-width:0}
 .hero{position:relative;overflow:hidden;padding:28px;min-height:200px;background:radial-gradient(ellipse at 78% 60%,rgba(255,138,61,.28),transparent 55%),linear-gradient(135deg,#1A2436,#050819 70%);border-color:var(--bd-blue)}
-.hero h1{font-size:28px;font-weight:700;margin:0 0 8px}
+.hero h1{font-size:24px;font-weight:700;margin:0 0 4px}
 .hero .cube{position:absolute;right:30px;top:24px;width:190px;height:150px;opacity:.95}
 .checks{position:absolute;right:16px;bottom:16px;background:rgba(3,8,23,.75);border:1px solid var(--bd);border-radius:12px;padding:8px 12px;font-size:12px;display:grid;gap:3px;color:var(--cyan)}
 .row{display:flex;align-items:center;justify-content:space-between;gap:8px}
@@ -88,7 +88,6 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .sheet-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .sheet-item{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:14px;border-radius:14px;background:rgba(2,11,36,.85);border:1px solid var(--bd);text-align:left;transition:.2s}
 .sheet-item:hover{background:var(--hover);border-color:var(--bd-blue)}
-.sheet-item svg{color:#FF8A3D}
 
 .verify-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
 .verify-table th,.verify-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--bd)}
@@ -103,7 +102,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .mtop{display:flex;align-items:center;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) 16px 8px;position:sticky;top:0;z-index:50;background:rgba(5,8,25,.92);backdrop-filter:blur(14px)}
 .main{padding:8px 14px calc(110px + env(safe-area-inset-bottom))}
 .mtop .search{display:none;position:absolute;left:12px;right:12px;top:100%;margin-top:6px}.mtop .search.show{display:flex}
-.hero{padding:18px;min-height:170px}.hero h1{font-size:21px}.hero .cube{width:110px;height:90px;right:6px;top:10px;opacity:.7}.checks{display:none}
+.hero{padding:18px;min-height:170px}.hero h1{font-size:20px}.hero .cube{width:110px;height:90px;right:6px;top:10px;opacity:.7}.checks{display:none}
 .pcards{grid-template-columns:1fr}.right{display:flex;flex-direction:column}
 .mnav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;position:fixed;left:0;right:0;bottom:0;z-index:100;padding:10px 8px calc(10px + env(safe-area-inset-bottom));background:rgba(5,8,25,.96);border-top:1px solid rgba(255,138,61,.3);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
 .mnav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--t3);min-height:48px;justify-content:center}
@@ -159,10 +158,20 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 </aside>
 
 <main class="main">
+<!-- განახლებული პერსონალური ზედა ზოლი (Header) -->
 <div class="top">
- <label class="search"><svg class="i"><use href="#srch"/></svg><input data-search placeholder="მოძებნე... (მაგალითად: დაფები, MDF, Geolami)"></label>
- <button aria-label="შეტყობინებები" onclick="toast('ახალი შეტყობინებები არ არის')"><svg class="i"><use href="#bell"/></svg></button>
- <button class="row" style="gap:10px" onclick="go('profile')"><span class="hex" style="border-radius:50%"><svg class="i"><use href="#user"/></svg></span>გიორგი</button>
+ <div style="display:flex;align-items:center;gap:12px">
+  <span class="hex" style="width:36px;height:36px;border-radius:50%;background:var(--gv)">
+   <svg class="i" style="width:18px"><use href="#user"/></svg>
+  </span>
+  <div>
+   <div style="font-weight:700;font-size:14px">გამარჯობა, გიორგი! 👋</div>
+   <div class="muted" style="font-size:11px;color:var(--ok)">● AI ასისტენტი მზად არის</div>
+  </div>
+ </div>
+ <div style="display:flex;gap:8px">
+  <button aria-label="შეტყობინებები" onclick="toast('ახალი შეკვეთები არ არის')" style="background:rgba(255,255,255,.05);border:1px solid var(--bd);width:36px;height:36px;border-radius:10px;display:grid;place-items:center"><svg class="i" style="width:16px"><use href="#bell"/></svg></button>
+ </div>
 </div>
 
 <div class="cols">
@@ -186,12 +195,29 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 </div>
 
 <div class="stack right">
+ <!-- ფერადი და მკაფიო სწრაფი მოქმედებები -->
  <section class="panel" id="quick"><div class="h" style="padding:16px">სწრაფი მოქმედებები</div>
   <div class="q">
-   <button class="sub" onclick="triggerAction('voice')"><svg class="i" style="color:var(--cyan)"><use href="#mic"/></svg>ხმოვანი რეჟიმი<span class="muted">საუბარი → რასკროი</span></button>
-   <button class="sub" onclick="triggerAction('photo')"><svg class="i" style="color:var(--cyan)"><use href="#cam"/></svg>ფოტოთი ატვირთვა<span class="muted">ფოტო → დეტალები</span></button>
-   <button class="sub" onclick="triggerAction('text')"><svg class="i" style="color:var(--cyan)"><use href="#doc"/></svg>ხელით შეყვანა<span class="muted">ზომები, მასალა...</span></button>
-   <button class="sub" onclick="triggerAction('3d')"><svg class="i" style="color:var(--cyan)"><use href="#cube"/></svg>3D ნახაზი<span class="muted">ესკიზი → მოდელი</span></button>
+   <button class="sub" onclick="triggerAction('voice')" style="border-left:3px solid var(--purple)">
+    <svg class="i" style="color:var(--purple)"><use href="#mic"/></svg>
+    <b style="color:#e4c7ff">ხმოვანი რეჟიმი</b>
+    <span class="muted">კარნახი → რასკროი</span>
+   </button>
+   <button class="sub" onclick="triggerAction('photo')" style="border-left:3px solid var(--blue)">
+    <svg class="i" style="color:var(--blue)"><use href="#cam"/></svg>
+    <b style="color:#c7e0ff">ფოტოთი ატვირთვა</b>
+    <span class="muted">ფოტო → დეტალები</span>
+   </button>
+   <button class="sub" onclick="triggerAction('text')" style="border-left:3px solid var(--ok)">
+    <svg class="i" style="color:var(--ok)"><use href="#doc"/></svg>
+    <b style="color:#c7ffee">ხელით შეყვანა</b>
+    <span class="muted">ზომები, მასალა...</span>
+   </button>
+   <button class="sub" onclick="triggerAction('3d')" style="border-left:3px solid #FF8A3D">
+    <svg class="i" style="color:#FF8A3D"><use href="#cube"/></svg>
+    <b style="color:#ffd8c7">3D ნახაზი</b>
+    <span class="muted">ესკიზი → მოდელი</span>
+   </button>
   </div></section>
 
  <section class="panel" id="off"><div class="row" style="padding:16px 16px 10px"><span class="h">ჩემი ნარჩენები</span><button class="link" onclick="document.getElementById('db').scrollIntoView({behavior:'smooth'})">ნარჩენები <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
@@ -218,10 +244,22 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
  <div class="sheet-pill"></div>
  <div class="row" style="margin-bottom:14px"><span class="h">როგორ გსურთ შეკვეთის მიცემა?</span><button class="muted" onclick="closeActionSheet()">✕</button></div>
  <div class="sheet-grid">
-  <button class="sheet-item" onclick="triggerAction('voice')"><svg class="i" style="width:24px;height:24px"><use href="#mic"/></svg><b>ხმოვანი რეჟიმი</b><span class="muted">კარნახით შეყვანა</span></button>
-  <button class="sheet-item" onclick="triggerAction('photo')"><svg class="i" style="width:24px;height:24px"><use href="#cam"/></svg><b>ფოტოს ატვირთვა</b><span class="muted">ხელნაწერი შპარგალკა</span></button>
-  <button class="sheet-item" onclick="triggerAction('text')"><svg class="i" style="width:24px;height:24px"><use href="#doc"/></svg><b>ტექსტით შეყვანა</b><span class="muted">ზომების ჩაწერა</span></button>
-  <button class="sheet-item" onclick="triggerAction('3d')"><svg class="i" style="width:24px;height:24px"><use href="#cube"/></svg><b>3D ნახაზი</b><span class="muted">ესკიზიდან ავეჯი</span></button>
+  <button class="sheet-item" onclick="triggerAction('voice')" style="border-left:3px solid var(--purple)">
+   <svg class="i" style="width:24px;height:24px;color:var(--purple)"><use href="#mic"/></svg>
+   <b>ხმოვანი რეჟიმი</b><span class="muted">კარნახით შეყვანა</span>
+  </button>
+  <button class="sheet-item" onclick="triggerAction('photo')" style="border-left:3px solid var(--blue)">
+   <svg class="i" style="width:24px;height:24px;color:var(--blue)"><use href="#cam"/></svg>
+   <b>ფოტოს ატვირთვა</b><span class="muted">ხელნაწერი შპარგალკა</span>
+  </button>
+  <button class="sheet-item" onclick="triggerAction('text')" style="border-left:3px solid var(--ok)">
+   <svg class="i" style="width:24px;height:24px;color:var(--ok)"><use href="#doc"/></svg>
+   <b>ტექსტით შეყვანა</b><span class="muted">ზომების ჩაწერა</span>
+  </button>
+  <button class="sheet-item" onclick="triggerAction('3d')" style="border-left:3px solid #FF8A3D">
+   <svg class="i" style="width:24px;height:24px;color:#FF8A3D"><use href="#cube"/></svg>
+   <b>3D ნახაზი</b><span class="muted">ესკიზიდან ავეჯი</span>
+  </button>
  </div>
 </div>
 
@@ -280,7 +318,7 @@ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 function startVoice(){
  dlg(`<div class="h">ხმოვანი ასისტენტი</div>
   <div style="text-align:center;padding:18px 0">
-   <button class="hex" style="width:72px;height:72px;margin:0 auto;border-radius:50%" id="micb"><svg class="i" style="width:32px;height:32px"><use href="#mic"/></svg></button>
+   <button class="hex" style="width:72px;height:72px;margin:0 auto;border-radius:50%;background:var(--purple);box-shadow:0 0 24px rgba(118,43,255,.5)" id="micb"><svg class="i" style="width:32px;height:32px"><use href="#mic"/></svg></button>
    <p id="tr" class="sec" style="margin:14px 0 6px">${SR?'დააჭირე და დაიწყე კარნახი...':'ხმის ამოცნობა მიუწვდომელია'}</p>
    <input id="ti" class="sub" style="padding:10px 14px;width:100%" placeholder="მაგ.: 2 დეტალი 720×450, 4 დეტალი 600×300">
   </div>
@@ -307,7 +345,7 @@ function openTextMode(){
 function open3DMode(){
  dlg(`<div class="h">3D ნახაზი & მოდელირება</div>
   <p class="sec" style="font-size:13px;margin:8px 0 14px">ატვირთეთ ესკიზი ან ჩაწერეთ ზომები 3D მოდელის გენერირებისთვის.</p>
-  <div class="sub" style="padding:16px;text-align:center;margin-bottom:14px">
+  <div class="sub" style="padding:16px;text-align:center;margin-bottom:14px;border-color:rgba(255,138,61,.4)">
    <svg class="i" style="width:44px;height:44px;color:#FF8A3D;margin:0 auto 8px"><use href="#cube"/></svg>
    <b>3D მოდულის ინტეგრაცია</b>
    <div class="muted" style="margin-top:4px">კარადის, ტუმბოს ან მაგიდის გენერირება ზომებით</div>
