@@ -39,7 +39,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .logo b{background:var(--g1);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hex{width:34px;height:34px;border-radius:10px;background:var(--gv);display:grid;place-items:center;box-shadow:0 0 18px rgba(255,138,61,.5)}
 .main{padding:18px 24px 40px;min-width:0}
-.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;background:rgba(7,12,31,.8);padding:12px 18px;border-radius:14px;border:1px solid var(--bd)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;background:rgba(7,12,31,.8);padding:14px 20px;border-radius:16px;border:1px solid var(--bd)}
 .search{flex:1;display:flex;align-items:center;gap:10px;padding:0 16px;height:44px;border-radius:14px;background:rgba(0,3,24,.95);border:1px solid var(--bd);color:var(--t3)}
 .search input{flex:1;background:none;border:0;color:var(--t1);font:inherit;font-size:14px;outline:0;min-width:0}
 .cols{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px}
@@ -156,20 +156,21 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 </aside>
 
 <main class="main">
+<!-- სულ ზემოთ დააბრუნდა პერსონალური მისალმება -->
 <div class="top">
  <div style="display:flex;align-items:center;gap:12px">
-  <span class="hex" style="width:36px;height:36px;border-radius:50%;background:var(--gv)"><svg class="i" style="width:18px"><use href="#user"/></svg></span>
+  <span class="hex" style="width:38px;height:38px;border-radius:50%;background:var(--gv)"><svg class="i" style="width:18px"><use href="#user"/></svg></span>
   <div>
    <div style="font-weight:700;font-size:14px">გამარჯობა, გიორგი! 👋</div>
    <div class="muted" style="font-size:11px;color:var(--ok)">● AI ასისტენტი მზად არის</div>
   </div>
  </div>
- <button aria-label="შეტყობინებები" onclick="toast('ახალი შეკვეთები არ არის')" style="background:rgba(255,255,255,.05);border:1px solid var(--bd);width:36px;height:36px;border-radius:10px;display:grid;place-items:center"><svg class="i" style="width:16px"><use href="#bell"/></svg></button>
+ <button aria-label="შეტყობინებები" onclick="toast('ახალი შეტყობინებები არ არის')" style="background:rgba(255,255,255,.05);border:1px solid var(--bd);width:36px;height:36px;border-radius:10px;display:grid;place-items:center"><svg class="i" style="width:16px"><use href="#bell"/></svg></button>
 </div>
 
 <div class="cols">
 <div class="stack">
- <!-- 1. სწრაფი მოქმედებები სულ ზემოთ -->
+ <!-- სწრაფი მოქმედებები პირდაპირ ზემოთ -->
  <section class="panel" id="quick" style="padding:18px">
   <div class="h" style="margin-bottom:14px">სწრაფი მოქმედებები</div>
   <div class="q">
@@ -196,7 +197,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
   </div>
  </section>
 
- <!-- 2. შეკვეთების სექცია სწრაფი მოქმედებების ქვემოთ -->
+ <!-- შეკვეთების სექცია -->
  <section class="panel" style="padding:18px" id="orders">
   <div class="row" style="margin-bottom:14px"><span class="h">ბოლო შეკვეთები</span><button class="link" onclick="toast('ყველა შეკვეთა ჩაიტვირთა')">ყველა შეკვეთა <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
   <div class="pcards" id="projects"></div>
@@ -252,7 +253,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
   </button>
   <button class="sheet-item" onclick="triggerAction('3d')" style="border-left:3px solid #FF8A3D">
    <svg class="i" style="width:24px;height:24px;color:#FF8A3D"><use href="#cube"/></svg>
-   <b>3D ნახაზი</b><span class="muted">ესკიზიდან ავეჯი</span>
+   <b>3D ნახაზი</b><span class="muted">ესკიზი → ავეჯი</span>
   </button>
  </div>
 </div>
