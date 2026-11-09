@@ -8,25 +8,24 @@
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#050819;--bg2:#0A1428;--side:#0A1428;--card:#0A1428;--hover:#1A2436;
---bd:rgba(110,140,200,.22);--bd-blue:rgba(255,138,61,.6);
+:root{--bg:#030511;--bg2:#070C1F;--side:#070C1F;--card:#070C1F;--hover:#131B33;
+--bd:rgba(110,140,200,.28);--bd-blue:rgba(255,138,61,.7);
 --t1:#F4F7FF;--t2:#A8B8D8;--t3:#7185AC;
---cyan:#8FB4FF;--blue:#087BFF;--purple:#762BFF;--pink:#FF28C8;
---ok:#00E6B8;--warn:#FFBE55;
+--cyan:#8FB4FF;--blue:#2272FF;--purple:#8B3DFF;--ok:#00F0B5;--warn:#FFBE55;
 --g1:linear-gradient(100deg,#FF9A4D 0%,#FF8A3D 45%,#F2552E 100%);
 --gv:linear-gradient(135deg,#FFA64D 0%,#FF8A3D 50%,#F2552E 100%);
---gp:linear-gradient(145deg,rgba(26,36,54,.92),rgba(10,20,40,.96))}
+--gp:linear-gradient(145deg,rgba(18,26,45,.95),rgba(7,12,31,.98))}
 *{box-sizing:border-box}
 html,body{margin:0;min-height:100%}
 body{font-family:'Noto Sans Georgian',system-ui,-apple-system,sans-serif;color:var(--t1);
-background:radial-gradient(ellipse at 85% 0,rgba(40,90,200,.28),transparent 42%),radial-gradient(ellipse at 0 100%,rgba(255,138,61,.12),transparent 40%),var(--bg);
+background:radial-gradient(ellipse at 85% 0,rgba(40,90,200,.28),transparent 42%),radial-gradient(ellipse at 0 100%,rgba(255,138,61,.14),transparent 40%),var(--bg);
 background-attachment:fixed;overflow-x:hidden}
-svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;flex:none}
+svg.i{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex:none}
 button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 :focus-visible{outline:2px solid var(--cyan);outline-offset:2px}
-.panel{background:var(--gp);border:1px solid var(--bd);border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.035),0 12px 32px rgba(0,0,0,.2);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.sub{background:rgba(2,11,36,.85);border:1px solid var(--bd);border-radius:14px;transition:.25s}
-.sub:hover{background:var(--hover);border-color:var(--bd-blue);box-shadow:0 0 22px rgba(255,138,61,.14)}
+.panel{background:var(--gp);border:1px solid var(--bd);border-radius:18px;box-shadow:inset 0 1px 0 rgba(255,255,255,.04),0 12px 32px rgba(0,0,0,.35);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.sub{background:rgba(3,8,24,.9);border:1px solid var(--bd);border-radius:14px;transition:.25s}
+.sub:hover{background:var(--hover);border-color:var(--bd-blue);box-shadow:0 0 24px rgba(255,138,61,.18)}
 .grad{background:var(--g1);background-size:200% 200%;animation:aur 16s ease-in-out infinite}
 @keyframes aur{0%,100%{background-position:0 50%}50%{background-position:100% 50%}}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:10px 20px;border-radius:999px;font-weight:600;font-size:14px;min-height:44px;color:#fff;box-shadow:0 0 22px rgba(255,138,61,.3)}
@@ -40,15 +39,14 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .logo b{background:var(--g1);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hex{width:34px;height:34px;border-radius:10px;background:var(--gv);display:grid;place-items:center;box-shadow:0 0 18px rgba(255,138,61,.5)}
 .main{padding:18px 24px 40px;min-width:0}
-.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;background:rgba(10,20,40,.6);padding:12px 18px;border-radius:14px;border:1px solid var(--bd)}
-.search{flex:1;display:flex;align-items:center;gap:10px;padding:0 16px;height:44px;border-radius:14px;background:rgba(0,3,24,.9);border:1px solid var(--bd);color:var(--t3)}
+.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;background:rgba(7,12,31,.8);padding:12px 18px;border-radius:14px;border:1px solid var(--bd)}
+.search{flex:1;display:flex;align-items:center;gap:10px;padding:0 16px;height:44px;border-radius:14px;background:rgba(0,3,24,.95);border:1px solid var(--bd);color:var(--t3)}
 .search input{flex:1;background:none;border:0;color:var(--t1);font:inherit;font-size:14px;outline:0;min-width:0}
 .cols{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px}
 .stack{display:flex;flex-direction:column;gap:18px;min-width:0}
-.hero{position:relative;overflow:hidden;padding:28px;min-height:200px;background:radial-gradient(ellipse at 78% 60%,rgba(255,138,61,.28),transparent 55%),linear-gradient(135deg,#1A2436,#050819 70%);border-color:var(--bd-blue)}
-.hero h1{font-size:24px;font-weight:700;margin:0 0 4px}
-.hero .cube{position:absolute;right:30px;top:24px;width:190px;height:150px;opacity:.95}
-.checks{position:absolute;right:16px;bottom:16px;background:rgba(3,8,23,.75);border:1px solid var(--bd);border-radius:12px;padding:8px 12px;font-size:12px;display:grid;gap:3px;color:var(--cyan)}
+.hero{position:relative;overflow:hidden;padding:24px;min-height:180px;background:radial-gradient(ellipse at 78% 60%,rgba(255,138,61,.3),transparent 55%),linear-gradient(135deg,#162238,#030511 70%);border-color:var(--bd-blue)}
+.hero h1{font-size:22px;font-weight:700;margin:0 0 4px}
+.hero .cube{position:absolute;right:24px;top:20px;width:170px;height:130px;opacity:.95}
 .row{display:flex;align-items:center;justify-content:space-between;gap:8px}
 .h{font-size:16px;font-weight:600}
 .link{color:var(--cyan);font-size:12px;display:inline-flex;gap:4px;align-items:center;min-height:32px}
@@ -57,11 +55,11 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .thumb{width:48px;height:56px;border-radius:6px;background:#e9edf5;display:grid;place-items:center}
 .thumb svg{stroke:#51607e;width:36px;height:42px}
 .badge{display:inline-flex;align-items:center;gap:6px;padding:5px 12px;border-radius:999px;font-size:12px;border:1px solid}
-.b-ok{color:var(--ok);border-color:rgba(0,230,184,.5);background:rgba(0,230,184,.1)}
-.b-pr{color:#4db2ff;border-color:rgba(8,123,255,.6);background:rgba(8,123,255,.12)}
+.b-ok{color:var(--ok);border-color:rgba(0,240,181,.5);background:rgba(0,240,181,.12)}
+.b-pr{color:#4db2ff;border-color:rgba(34,114,255,.6);background:rgba(34,114,255,.15)}
 .b-dr{color:#d18bff;border-color:rgba(255,138,61,.6);background:rgba(255,138,61,.18)}
-.q{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 16px 16px}
-.q button{padding:12px;text-align:left;font-size:13px;display:flex;flex-direction:column;gap:6px}
+.q{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0}
+.q button{padding:14px;text-align:left;font-size:13px;display:flex;flex-direction:column;gap:6px}
 .mats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 14px 14px}
 .mat{padding:6px;text-align:left;font-size:11px;display:block;width:100%}
 .mimg{height:48px;border-radius:8px;margin-bottom:6px}
@@ -69,42 +67,42 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .chip{padding:4px 12px;border-radius:999px;font-size:12px;border:1px solid var(--bd);color:var(--t2);white-space:nowrap;min-height:30px}
 .chip.on{background:var(--g1);color:#1A0E05;border-color:transparent}
 .feat{display:flex;align-items:center;gap:16px;padding:14px 18px;flex-wrap:wrap}.fi{display:flex;gap:10px;align-items:center;flex:1;font-size:13px;min-width:120px}.fi svg{color:#FF8A3D}
-.banner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px;font-size:13px;background:linear-gradient(90deg,rgba(122,74,34,.55),rgba(10,20,40,.9) 55%),repeating-linear-gradient(100deg,#5e3818 0 6px,#6e4420 6px 12px)}
-.aic{margin-top:auto;padding:14px;display:grid;gap:8px;font-size:13px;background:radial-gradient(ellipse at 80% 0,rgba(255,138,61,.55),transparent 65%),linear-gradient(160deg,#2a1a14,#0A1428)}
+.banner{display:flex;align-items:center;justify-content:space-between;gap:14px;padding:18px 22px;font-size:13px;background:linear-gradient(90deg,rgba(122,74,34,.55),rgba(7,12,31,.9) 55%),repeating-linear-gradient(100deg,#5e3818 0 6px,#6e4420 6px 12px)}
+.aic{margin-top:auto;padding:14px;display:grid;gap:8px;font-size:13px;background:radial-gradient(ellipse at 80% 0,rgba(255,138,61,.55),transparent 65%),linear-gradient(160deg,#2a1a14,#070C1F)}
 .mtop,.mnav{display:none}
 
 /* Action Sheet & Verification Modal */
-.ov{position:fixed;inset:0;z-index:200;background:rgba(3,8,23,.82);display:none;place-items:center;padding:16px;backdrop-filter:blur(8px)}
+.ov{position:fixed;inset:0;z-index:200;background:rgba(3,5,17,.85);display:none;place-items:center;padding:16px;backdrop-filter:blur(8px)}
 .ov.show{display:grid}
 .dlg{width:min(480px,100%);max-height:88vh;overflow:auto;padding:22px;border-color:var(--bd-blue)}
-.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:300;padding:10px 18px;border-radius:999px;background:#0D2342;border:1px solid var(--bd-blue);font-size:13px;opacity:0;pointer-events:none;transition:.3s}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:300;padding:10px 18px;border-radius:999px;background:#070C1F;border:1px solid var(--bd-blue);font-size:13px;opacity:0;pointer-events:none;transition:.3s}
 .toast.show{opacity:1}
 
-.sheet-backdrop{position:fixed;inset:0;background:rgba(3,8,23,.75);backdrop-filter:blur(6px);z-index:150;opacity:0;pointer-events:none;transition:opacity .3s ease}
+.sheet-backdrop{position:fixed;inset:0;background:rgba(3,5,17,.8);backdrop-filter:blur(6px);z-index:150;opacity:0;pointer-events:none;transition:opacity .32s ease}
 .sheet-backdrop.open{opacity:1;pointer-events:auto}
-.sheet{position:fixed;left:0;right:0;bottom:0;z-index:160;background:var(--gp);border-top:1px solid var(--bd-blue);border-radius:24px 24px 0 0;padding:18px 20px calc(24px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .32s cubic-bezier(0.16,1,0.3,1);box-shadow:0 -10px 40px rgba(0,0,0,.6)}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:160;background:var(--gp);border-top:1px solid var(--bd-blue);border-radius:24px 24px 0 0;padding:18px 20px calc(24px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .32s cubic-bezier(0.16,1,0.3,1);box-shadow:0 -10px 40px rgba(0,0,0,.7)}
 .sheet.open{transform:translateY(0)}
-.sheet-pill{width:42px;height:4px;background:rgba(255,255,255,.2);border-radius:999px;margin:0 auto 16px}
+.sheet-pill{width:42px;height:4px;background:rgba(255,255,255,.25);border-radius:999px;margin:0 auto 16px}
 .sheet-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.sheet-item{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:14px;border-radius:14px;background:rgba(2,11,36,.85);border:1px solid var(--bd);text-align:left;transition:.2s}
+.sheet-item{display:flex;flex-direction:column;align-items:flex-start;gap:8px;padding:14px;border-radius:14px;background:rgba(3,8,24,.9);border:1px solid var(--bd);text-align:left;transition:.2s}
 .sheet-item:hover{background:var(--hover);border-color:var(--bd-blue)}
 
 .verify-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
 .verify-table th,.verify-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--bd)}
 .verify-table th{color:var(--t3);font-weight:500}
-.cell-warn{background:rgba(255,190,85,.16);border:1px solid rgba(255,190,85,.6);border-radius:6px;color:#FFD285;font-weight:600;padding:4px 8px;display:inline-block}
-.editable-cell{background:rgba(255,255,255,.05);border:1px dashed var(--bd);border-radius:4px;padding:4px 6px;color:#fff;width:100%;max-width:80px;font:inherit}
+.cell-warn{background:rgba(255,190,85,.18);border:1px solid rgba(255,190,85,.7);border-radius:6px;color:#FFD285;font-weight:600;padding:4px 8px;display:inline-block}
+.editable-cell{background:rgba(255,255,255,.06);border:1px dashed var(--bd);border-radius:4px;padding:4px 6px;color:#fff;width:100%;max-width:80px;font:inherit}
 
 @media(max-width:1180px){.cols{grid-template-columns:1fr}.right{display:grid;grid-template-columns:1fr 1fr;gap:18px}.right>*:first-child{grid-column:1/-1}}
 @media(max-width:1000px){.app{grid-template-columns:76px 1fr}.side .tx,.side .aic,.side .logo span{display:none}.nav{justify-content:center;padding:12px}}
 @media(max-width:767px){
 .app{display:block}.side,.top{display:none}
-.mtop{display:flex;align-items:center;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) 16px 8px;position:sticky;top:0;z-index:50;background:rgba(5,8,25,.92);backdrop-filter:blur(14px)}
+.mtop{display:flex;align-items:center;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) 16px 8px;position:sticky;top:0;z-index:50;background:rgba(3,5,17,.95);backdrop-filter:blur(14px)}
 .main{padding:8px 14px calc(110px + env(safe-area-inset-bottom))}
 .mtop .search{display:none;position:absolute;left:12px;right:12px;top:100%;margin-top:6px}.mtop .search.show{display:flex}
-.hero{padding:18px;min-height:170px}.hero h1{font-size:20px}.hero .cube{width:110px;height:90px;right:6px;top:10px;opacity:.7}.checks{display:none}
+.hero{padding:16px;min-height:150px}.hero h1{font-size:19px}.hero .cube{width:100px;height:80px;right:6px;top:8px;opacity:.7}
 .pcards{grid-template-columns:1fr}.right{display:flex;flex-direction:column}
-.mnav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;position:fixed;left:0;right:0;bottom:0;z-index:100;padding:10px 8px calc(10px + env(safe-area-inset-bottom));background:rgba(5,8,25,.96);border-top:1px solid rgba(255,138,61,.3);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
+.mnav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;position:fixed;left:0;right:0;bottom:0;z-index:100;padding:10px 8px calc(10px + env(safe-area-inset-bottom));background:rgba(3,5,17,.98);border-top:1px solid rgba(255,138,61,.4);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
 .mnav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--t3);min-height:48px;justify-content:center}
 .mnav button.on{color:#FF8A3D}
 .mnav .ai{width:60px;height:60px;border-radius:50%;margin:-30px auto 0;background:var(--gv);color:#fff;display:grid;place-items:center;box-shadow:0 0 28px rgba(255,138,61,.6),0 0 0 4px var(--bg)}
@@ -158,68 +156,64 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 </aside>
 
 <main class="main">
-<!-- განახლებული პერსონალური ზედა ზოლი (Header) -->
 <div class="top">
  <div style="display:flex;align-items:center;gap:12px">
-  <span class="hex" style="width:36px;height:36px;border-radius:50%;background:var(--gv)">
-   <svg class="i" style="width:18px"><use href="#user"/></svg>
-  </span>
+  <span class="hex" style="width:36px;height:36px;border-radius:50%;background:var(--gv)"><svg class="i" style="width:18px"><use href="#user"/></svg></span>
   <div>
    <div style="font-weight:700;font-size:14px">გამარჯობა, გიორგი! 👋</div>
    <div class="muted" style="font-size:11px;color:var(--ok)">● AI ასისტენტი მზად არის</div>
   </div>
  </div>
- <div style="display:flex;gap:8px">
-  <button aria-label="შეტყობინებები" onclick="toast('ახალი შეკვეთები არ არის')" style="background:rgba(255,255,255,.05);border:1px solid var(--bd);width:36px;height:36px;border-radius:10px;display:grid;place-items:center"><svg class="i" style="width:16px"><use href="#bell"/></svg></button>
- </div>
+ <button aria-label="შეტყობინებები" onclick="toast('ახალი შეტყობინებები არ არის')" style="background:rgba(255,255,255,.05);border:1px solid var(--bd);width:36px;height:36px;border-radius:10px;display:grid;place-items:center"><svg class="i" style="width:16px"><use href="#bell"/></svg></button>
 </div>
 
 <div class="cols">
 <div class="stack">
+ <!-- 1. სწრაფი მოქმედებები აიწია სულ ზემოთ -->
+ <section class="panel" id="quick" style="padding:18px">
+  <div class="h" style="margin-bottom:14px">სწრაფი მოქმედებები</div>
+  <div class="q">
+   <button class="sub" onclick="triggerAction('voice')" style="border-left:4px solid var(--purple);background:rgba(139,61,255,.07)">
+    <svg class="i" style="color:var(--purple);width:24px;height:24px"><use href="#mic"/></svg>
+    <b style="color:#e9dcff;font-size:14px">ხმოვანი რეჟიმი</b>
+    <span class="muted">კარნახი → რასკროი</span>
+   </button>
+   <button class="sub" onclick="triggerAction('photo')" style="border-left:4px solid var(--blue);background:rgba(34,114,255,.07)">
+    <svg class="i" style="color:var(--blue);width:24px;height:24px"><use href="#cam"/></svg>
+    <b style="color:#dcedff;font-size:14px">ფოტოთი ატვირთვა</b>
+    <span class="muted">ფოტო → დეტალები</span>
+   </button>
+   <button class="sub" onclick="triggerAction('text')" style="border-left:4px solid var(--ok);background:rgba(0,240,181,.07)">
+    <svg class="i" style="color:var(--ok);width:24px;height:24px"><use href="#doc"/></svg>
+    <b style="color:#c7ffea;font-size:14px">ხელით შეყვანა</b>
+    <span class="muted">ზომები, მასალა...</span>
+   </button>
+   <button class="sub" onclick="triggerAction('3d')" style="border-left:4px solid #FF8A3D;background:rgba(255,138,61,.07)">
+    <svg class="i" style="color:#FF8A3D;width:24px;height:24px"><use href="#cube"/></svg>
+    <b style="color:#ffe5d9;font-size:14px">3D ნახაზი</b>
+    <span class="muted">ესკიზი → მოდელი</span>
+   </button>
+  </div>
+ </section>
+
+ <!-- 2. შეკვეთების სექცია გადმოვიდა სწრაფი მოქმედებების ქვემოთ -->
+ <section class="panel" style="padding:18px" id="orders">
+  <div class="row" style="margin-bottom:14px"><span class="h">ბოლო შეკვეთები</span><button class="link" onclick="toast('ყველა შეკვეთა ჩაიტვირთა')">ყველა შეკვეთა <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
+  <div class="pcards" id="projects"></div>
+ </section>
+
  <section class="panel hero">
   <svg class="cube" viewBox="0 0 220 150" aria-hidden="true"><defs><pattern id="wg" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#c98f55"/><path d="M0 2h8M0 6h8" stroke="#a86f3c" stroke-width=".8"/></pattern></defs><path d="M20 100l80-24 100 22-80 30z" fill="url(#wg)"/><path d="M20 100v12l100 28v-12z" fill="#7a4a22"/><path d="M120 128v12l80-30v-12z" fill="#5e3818"/><path d="M60 70l70-22 70 18-70 22z" fill="url(#wg)"/><path d="M60 70v10l70 18v-10z" fill="#7a4a22"/><path d="M110 10h80v60h-80z" fill="rgba(143,180,255,.12)" stroke="#8FB4FF" stroke-width="1"/><path d="M120 22h30v20h-30zM155 22h28v38h-28z" fill="none" stroke="#8FB4FF" stroke-width=".8"/></svg>
   <h1>ჭკვიანი რასკროი <span style="color:#FF8A3D">AI</span></h1>
   <p style="font-weight:600;margin:0 0 6px">თქვენი იდეა — ჩვენი ტექნოლოგია!</p>
   <p class="sec" style="max-width:360px;margin:0 0 16px;font-size:13px">AI ასისტენტი, რომელიც დაგეხმარებათ ბალიშებში, მასალისა და ნარჩენების ოპტიმიზაციაში.</p>
   <button class="btn grad" onclick="openActionSheet()">ახალი შეკვეთა <svg class="i" style="width:16px"><use href="#arr"/></svg></button>
-  <div class="checks"><span>✓ სწრაფი</span><span>✓ ზუსტი</span><span>✓ ეკონომიური</span></div>
  </section>
 
- <section class="panel" style="padding:18px" id="orders">
-  <div class="row" style="margin-bottom:14px"><span class="h">ბოლო შეკვეთები</span><button class="link" onclick="toast('ყველა შეკვეთა ჩაიტვირთა')">ყველა შეკვეთა <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
-  <div class="pcards" id="projects"></div>
- </section>
-
- <section class="panel feat"><div class="fi"><svg class="i"><use href="#chk"/></svg><div><b>სწრაფი</b><div class="muted">გათვლა წამებში</div></div></div><div class="fi"><svg class="i"><use href="#chk"/></svg><div><b>უსაფრთხო</b><div class="muted">მონაცემები დაცულია</div></div></div><div class="fi"><svg class="i"><use href="#chk"/></svg><div><b>მარტივი</b><div class="muted">ინტუიციური გამოყენება</div></div></div><button class="btn grad" onclick="openActionSheet()">შექმენი რასკროი <svg class="i" style="width:16px"><use href="#arr"/></svg></button></section>
  <section class="panel banner"><div><b style="color:#FFA64D">თქვენი ნარჩენები — ახალი შესაძლებლობა</b><div class="muted">გამოიყენეთ ნარჩენები, დაზოგეთ მასალა და იმუშავეთ უფრო ეკონომიურად.</div></div><button class="btn sub" onclick="go('db')">ნარჩენების ბაზა <svg class="i" style="width:16px"><use href="#arr"/></svg></button></section>
 </div>
 
 <div class="stack right">
- <!-- ფერადი და მკაფიო სწრაფი მოქმედებები -->
- <section class="panel" id="quick"><div class="h" style="padding:16px">სწრაფი მოქმედებები</div>
-  <div class="q">
-   <button class="sub" onclick="triggerAction('voice')" style="border-left:3px solid var(--purple)">
-    <svg class="i" style="color:var(--purple)"><use href="#mic"/></svg>
-    <b style="color:#e4c7ff">ხმოვანი რეჟიმი</b>
-    <span class="muted">კარნახი → რასკროი</span>
-   </button>
-   <button class="sub" onclick="triggerAction('photo')" style="border-left:3px solid var(--blue)">
-    <svg class="i" style="color:var(--blue)"><use href="#cam"/></svg>
-    <b style="color:#c7e0ff">ფოტოთი ატვირთვა</b>
-    <span class="muted">ფოტო → დეტალები</span>
-   </button>
-   <button class="sub" onclick="triggerAction('text')" style="border-left:3px solid var(--ok)">
-    <svg class="i" style="color:var(--ok)"><use href="#doc"/></svg>
-    <b style="color:#c7ffee">ხელით შეყვანა</b>
-    <span class="muted">ზომები, მასალა...</span>
-   </button>
-   <button class="sub" onclick="triggerAction('3d')" style="border-left:3px solid #FF8A3D">
-    <svg class="i" style="color:#FF8A3D"><use href="#cube"/></svg>
-    <b style="color:#ffd8c7">3D ნახაზი</b>
-    <span class="muted">ესკიზი → მოდელი</span>
-   </button>
-  </div></section>
-
  <section class="panel" id="off"><div class="row" style="padding:16px 16px 10px"><span class="h">ჩემი ნარჩენები</span><button class="link" onclick="document.getElementById('db').scrollIntoView({behavior:'smooth'})">ნარჩენები <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
   <div class="chips" data-chips="off"></div><div class="mats" id="offList"></div></section>
 
@@ -318,7 +312,7 @@ const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
 function startVoice(){
  dlg(`<div class="h">ხმოვანი ასისტენტი</div>
   <div style="text-align:center;padding:18px 0">
-   <button class="hex" style="width:72px;height:72px;margin:0 auto;border-radius:50%;background:var(--purple);box-shadow:0 0 24px rgba(118,43,255,.5)" id="micb"><svg class="i" style="width:32px;height:32px"><use href="#mic"/></svg></button>
+   <button class="hex" style="width:72px;height:72px;margin:0 auto;border-radius:50%;background:var(--purple);box-shadow:0 0 24px rgba(139,61,255,.6)" id="micb"><svg class="i" style="width:32px;height:32px"><use href="#mic"/></svg></button>
    <p id="tr" class="sec" style="margin:14px 0 6px">${SR?'დააჭირე და დაიწყე კარნახი...':'ხმის ამოცნობა მიუწვდომელია'}</p>
    <input id="ti" class="sub" style="padding:10px 14px;width:100%" placeholder="მაგ.: 2 დეტალი 720×450, 4 დეტალი 600×300">
   </div>
