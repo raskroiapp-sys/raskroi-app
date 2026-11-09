@@ -39,7 +39,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .logo b{background:var(--g1);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hex{width:34px;height:34px;border-radius:10px;background:var(--gv);display:grid;place-items:center;box-shadow:0 0 18px rgba(255,138,61,.5)}
 .main{padding:18px 24px 40px;min-width:0}
-.top{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:18px;background:rgba(7,12,31,.8);padding:14px 20px;border-radius:16px;border:1px solid var(--bd)}
+.top{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .search{flex:1;display:flex;align-items:center;gap:10px;padding:0 16px;height:44px;border-radius:14px;background:rgba(0,3,24,.95);border:1px solid var(--bd);color:var(--t3)}
 .search input{flex:1;background:none;border:0;color:var(--t1);font:inherit;font-size:14px;outline:0;min-width:0}
 .cols{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:18px}
@@ -58,7 +58,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .b-ok{color:var(--ok);border-color:rgba(0,240,181,.5);background:rgba(0,240,181,.12)}
 .b-pr{color:#4db2ff;border-color:rgba(34,114,255,.6);background:rgba(34,114,255,.15)}
 .b-dr{color:#d18bff;border-color:rgba(255,138,61,.6);background:rgba(255,138,61,.18)}
-.q{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:0}
+.q{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:0}
 .q button{padding:14px;text-align:left;font-size:13px;display:flex;flex-direction:column;gap:6px}
 .mats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 14px 14px}
 .mat{padding:6px;text-align:left;font-size:11px;display:block;width:100%}
@@ -94,7 +94,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .editable-cell{background:rgba(255,255,255,.06);border:1px dashed var(--bd);border-radius:4px;padding:4px 6px;color:#fff;width:100%;max-width:80px;font:inherit}
 
 @media(max-width:1180px){.cols{grid-template-columns:1fr}.right{display:grid;grid-template-columns:1fr 1fr;gap:18px}.right>*:first-child{grid-column:1/-1}}
-@media(max-width:1000px){.app{grid-template-columns:76px 1fr}.side .tx,.side .aic,.side .logo span{display:none}.nav{justify-content:center;padding:12px}}
+@media(max-width:1000px){.app{grid-template-columns:76px 1fr}.side .tx,.side .aic,.side .logo span{display:none}.nav{justify-content:center;padding:12px}.q{grid-template-columns:1fr 1fr}}
 @media(max-width:767px){
 .app{display:block}.side,.top{display:none}
 .mtop{display:flex;align-items:center;justify-content:space-between;padding:calc(12px + env(safe-area-inset-top)) 16px 8px;position:sticky;top:0;z-index:50;background:rgba(3,5,17,.95);backdrop-filter:blur(14px)}
@@ -102,6 +102,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .mtop .search{display:none;position:absolute;left:12px;right:12px;top:100%;margin-top:6px}.mtop .search.show{display:flex}
 .hero{padding:16px;min-height:150px}.hero h1{font-size:19px}.hero .cube{width:100px;height:80px;right:6px;top:8px;opacity:.7}
 .pcards{grid-template-columns:1fr}.right{display:flex;flex-direction:column}
+.q{grid-template-columns:1fr 1fr}
 .mnav{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));align-items:end;position:fixed;left:0;right:0;bottom:0;z-index:100;padding:10px 8px calc(10px + env(safe-area-inset-bottom));background:rgba(3,5,17,.98);border-top:1px solid rgba(255,138,61,.4);backdrop-filter:blur(22px);-webkit-backdrop-filter:blur(22px)}
 .mnav button{display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;color:var(--t3);min-height:48px;justify-content:center}
 .mnav button.on{color:#FF8A3D}
@@ -139,70 +140,31 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 
 <div class="app">
 <aside class="side">
- <div class="logo" style="margin-bottom:18px"><div class="hex"><svg class="i"><use href="#cube"/></svg></div><span>Smart Raskroi <b>AI</b></span></div>
+ <div class="logo" style="margin-bottom:18px"><div class="hex"><svg class="i"><use href="#cube"/></svg></div><span>Raskroi <b>AI</b></span></div>
  <button class="nav on" data-go="home"><svg class="i"><use href="#home"/></svg><span class="tx">მთავარი</span></button>
- <button class="nav" data-go="orders"><svg class="i"><use href="#list"/></svg><span class="tx">შეკვეთების მენეჯმენტი</span></button>
- <button class="nav" data-go="upload"><svg class="i"><use href="#up"/></svg><span class="tx">ფაილის ატვირთვა</span></button>
+ <button class="nav" data-go="orders"><svg class="i"><use href="#list"/></svg><span class="tx">შეკვეთების ისტორიები</span></button>
+ <button class="nav" data-go="upload"><svg class="i"><use href="#up"/></svg><span class="tx">ფაილების ატვირთვა</span></button>
  <button class="nav" data-go="settings"><svg class="i"><use href="#cog"/></svg><span class="tx">პარამეტრები</span></button>
  <button class="nav" data-go="off"><svg class="i"><use href="#box"/></svg><span class="tx">ჩემი ნარჩენები</span></button>
  <button class="nav" data-go="db"><svg class="i"><use href="#db"/></svg><span class="tx">ნარჩენების ბაზა</span></button>
  <button class="nav" data-go="users"><svg class="i"><use href="#users"/></svg><span class="tx">მომხმარებლების ბაზა</span></button>
- <button class="nav" data-go="profile"><svg class="i"><use href="#user"/></svg><span class="tx">პროფილი</span></button>
+ <button class="nav" data-go="profile"><svg class="i"><use href="#user"/></svg><span class="tx">პარამეტრები</span></button>
  <div class="panel aic">
-  <b>AI ასისტენტი</b><span class="muted">დაიწყე საუბარი და მე დაგეხმარები</span>
-  <button class="btn grad" style="justify-content:center" onclick="openActionSheet()"><svg class="i"><use href="#mic"/></svg>ახალი შეკვეთა</button>
+  <b>AI ასისტენტი</b><span class="muted">დაგეხმარება სწრაფად და მეტად ამოცნობაში</span>
+  <button class="btn grad" style="justify-content:center" onclick="openActionSheet()"><svg class="i"><use href="#mic"/></svg>დაიწყე საუბარი</button>
  </div>
- <div class="muted" style="padding:8px 6px">ვერსია 1.0.0 · Smart Raskroi AI</div>
+ <div class="muted" style="padding:8px 6px">Raskroi AI v1.0.0<br>Made with ❤️ for woodworkers</div>
 </aside>
 
 <main class="main">
-<!-- სულ ზემოთ დააბრუნდა პერსონალური მისალმება -->
 <div class="top">
- <div style="display:flex;align-items:center;gap:12px">
-  <span class="hex" style="width:38px;height:38px;border-radius:50%;background:var(--gv)"><svg class="i" style="width:18px"><use href="#user"/></svg></span>
-  <div>
-   <div style="font-weight:700;font-size:14px">გამარჯობა, გიორგი! 👋</div>
-   <div class="muted" style="font-size:11px;color:var(--ok)">● AI ასისტენტი მზად არის</div>
-  </div>
- </div>
+ <label class="search"><svg class="i"><use href="#srch"/></svg><input data-search placeholder="ძებნა... (მაგალითად: ფანერა, MDF, Geolami)"></label>
  <button aria-label="შეტყობინებები" onclick="toast('ახალი შეტყობინებები არ არის')" style="background:rgba(255,255,255,.05);border:1px solid var(--bd);width:36px;height:36px;border-radius:10px;display:grid;place-items:center"><svg class="i" style="width:16px"><use href="#bell"/></svg></button>
+ <button class="row" style="gap:8px;background:rgba(255,255,255,.05);border:1px solid var(--bd);padding:6px 14px;border-radius:12px" onclick="go('profile')"><span class="hex" style="width:28px;height:28px;border-radius:50%"><svg class="i" style="width:14px"><use href="#user"/></svg></span>გიორგი</button>
 </div>
 
 <div class="cols">
 <div class="stack">
- <!-- სწრაფი მოქმედებები პირდაპირ ზემოთ -->
- <section class="panel" id="quick" style="padding:18px">
-  <div class="h" style="margin-bottom:14px">სწრაფი მოქმედებები</div>
-  <div class="q">
-   <button class="sub" onclick="triggerAction('voice')" style="border-left:4px solid var(--purple);background:rgba(139,61,255,.07)">
-    <svg class="i" style="color:var(--purple);width:24px;height:24px"><use href="#mic"/></svg>
-    <b style="color:#e9dcff;font-size:14px">ხმოვანი რეჟიმი</b>
-    <span class="muted">კარნახი → რასკროი</span>
-   </button>
-   <button class="sub" onclick="triggerAction('photo')" style="border-left:4px solid var(--blue);background:rgba(34,114,255,.07)">
-    <svg class="i" style="color:var(--blue);width:24px;height:24px"><use href="#cam"/></svg>
-    <b style="color:#dcedff;font-size:14px">ფოტოთი ატვირთვა</b>
-    <span class="muted">ფოტო → დეტალები</span>
-   </button>
-   <button class="sub" onclick="triggerAction('text')" style="border-left:4px solid var(--ok);background:rgba(0,240,181,.07)">
-    <svg class="i" style="color:var(--ok);width:24px;height:24px"><use href="#doc"/></svg>
-    <b style="color:#c7ffea;font-size:14px">ხელით შეყვანა</b>
-    <span class="muted">ზომები, მასალა...</span>
-   </button>
-   <button class="sub" onclick="triggerAction('3d')" style="border-left:4px solid #FF8A3D;background:rgba(255,138,61,.07)">
-    <svg class="i" style="color:#FF8A3D;width:24px;height:24px"><use href="#cube"/></svg>
-    <b style="color:#ffe5d9;font-size:14px">3D ნახაზი</b>
-    <span class="muted">ესკიზი → მოდელი</span>
-   </button>
-  </div>
- </section>
-
- <!-- შეკვეთების სექცია -->
- <section class="panel" style="padding:18px" id="orders">
-  <div class="row" style="margin-bottom:14px"><span class="h">ბოლო შეკვეთები</span><button class="link" onclick="toast('ყველა შეკვეთა ჩაიტვირთა')">ყველა შეკვეთა <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
-  <div class="pcards" id="projects"></div>
- </section>
-
  <section class="panel hero">
   <svg class="cube" viewBox="0 0 220 150" aria-hidden="true"><defs><pattern id="wg" width="8" height="8" patternUnits="userSpaceOnUse"><rect width="8" height="8" fill="#c98f55"/><path d="M0 2h8M0 6h8" stroke="#a86f3c" stroke-width=".8"/></pattern></defs><path d="M20 100l80-24 100 22-80 30z" fill="url(#wg)"/><path d="M20 100v12l100 28v-12z" fill="#7a4a22"/><path d="M120 128v12l80-30v-12z" fill="#5e3818"/><path d="M60 70l70-22 70 18-70 22z" fill="url(#wg)"/><path d="M60 70v10l70 18v-10z" fill="#7a4a22"/><path d="M110 10h80v60h-80z" fill="rgba(143,180,255,.12)" stroke="#8FB4FF" stroke-width="1"/><path d="M120 22h30v20h-30zM155 22h28v38h-28z" fill="none" stroke="#8FB4FF" stroke-width=".8"/></svg>
   <h1>ჭკვიანი რასკროი <span style="color:#FF8A3D">AI</span></h1>
@@ -211,14 +173,46 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
   <button class="btn grad" onclick="openActionSheet()">ახალი შეკვეთა <svg class="i" style="width:16px"><use href="#arr"/></svg></button>
  </section>
 
+ <!-- 4 ფერადი სწრაფი მოქმედება -->
+ <section class="panel" id="quick" style="padding:18px">
+  <div class="h" style="margin-bottom:14px">სწრაფი მოქმედებები</div>
+  <div class="q">
+   <button class="sub" onclick="triggerAction('voice')" style="border-left:4px solid var(--purple);background:rgba(139,61,255,.07)">
+    <svg class="i" style="color:var(--purple);width:24px;height:24px"><use href="#mic"/></svg>
+    <b style="color:#e9dcff;font-size:14px">ხმოვანი რეჟიმი</b>
+    <span class="muted">საუბარი → რასკროი</span>
+   </button>
+   <button class="sub" onclick="triggerAction('photo')" style="border-left:4px solid var(--blue);background:rgba(34,114,255,.07)">
+    <svg class="i" style="color:var(--blue);width:24px;height:24px"><use href="#cam"/></svg>
+    <b style="color:#dcedff;font-size:14px">ფოტოთი ატვირთვა</b>
+    <span class="muted">ფოტო → დასკვნა</span>
+   </button>
+   <button class="sub" onclick="triggerAction('text')" style="border-left:4px solid var(--ok);background:rgba(0,240,181,.07)">
+    <svg class="i" style="color:var(--ok);width:24px;height:24px"><use href="#doc"/></svg>
+    <b style="color:#c7ffea;font-size:14px">დოკუმენტის ატვირთვა</b>
+    <span class="muted">ფაილი → დასკვნა</span>
+   </button>
+   <button class="sub" onclick="openActionSheet()" style="border-left:4px solid #FF8A3D;background:rgba(255,138,61,.07)">
+    <svg class="i" style="color:#FF8A3D;width:24px;height:24px"><use href="#cube"/></svg>
+    <b style="color:#ffe5d9;font-size:14px">ახალი მასალები</b>
+    <span class="muted">ბაზიდან არჩევა</span>
+   </button>
+  </div>
+ </section>
+
+ <section class="panel" style="padding:18px" id="orders">
+  <div class="row" style="margin-bottom:14px"><span class="h">ბოლო რასკროიტები</span><button class="link" onclick="toast('ყველა რასკროი ჩაიტვირთა')">ყველა მორჩეტი <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
+  <div class="pcards" id="projects"></div>
+ </section>
+
  <section class="panel banner"><div><b style="color:#FFA64D">თქვენი ნარჩენები — ახალი შესაძლებლობა</b><div class="muted">გამოიყენეთ ნარჩენები, დაზოგეთ მასალა და იმუშავეთ უფრო ეკონომიურად.</div></div><button class="btn sub" onclick="go('db')">ნარჩენების ბაზა <svg class="i" style="width:16px"><use href="#arr"/></svg></button></section>
 </div>
 
 <div class="stack right">
- <section class="panel" id="off"><div class="row" style="padding:16px 16px 10px"><span class="h">ჩემი ნარჩენები</span><button class="link" onclick="document.getElementById('db').scrollIntoView({behavior:'smooth'})">ნარჩენები <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
+ <section class="panel" id="off"><div class="row" style="padding:16px 16px 10px"><span class="h">ჩემი ნარჩენები</span><button class="link" onclick="document.getElementById('db').scrollIntoView({behavior:'smooth'})">ნახვა ყველა <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
   <div class="chips" data-chips="off"></div><div class="mats" id="offList"></div></section>
 
- <section class="panel" id="db"><div class="row" style="padding:16px 16px 10px"><span class="h">ნარჩენების ბაზა</span><button class="link" onclick="toast('ბაზა განახლდა')">ყველა <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
+ <section class="panel" id="db"><div class="row" style="padding:16px 16px 10px"><span class="h">ნარჩენების ბაზა</span><button class="link" onclick="toast('ბაზა განახლდა')">ნახვა ყველა <svg class="i" style="width:14px"><use href="#arr"/></svg></button></div>
   <div class="chips" data-chips="db"></div><div class="mats" id="dbList"></div></section>
 </div>
 </div>
@@ -264,8 +258,8 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 <script>
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const P=[{n:'შავნაბადა',d:'12.10.2025',s:'ok',t:'დამტკიცებულია'},{n:'LTBDS',d:'10.10.2025',s:'pr',t:'პროექტი'},{n:'Geolami',d:'08.10.2025',s:'dr',t:'შეყვანილი'}];
-const OFF=[{n:'ლამინატი',w:180,h:140,q:3,c:'#c98f55',k:'ლამინატი',note:'მუხის დეკორი'},{n:'MDF',w:120,h:80,q:3,c:'#8d8896',k:'MDF',note:'ნაცრისფერი'},{n:'ლამინატი',w:100,h:60,q:1,c:'#eef1f6',k:'ლამინატი',note:'თეთრი'}];
-const DB=[{n:'ლამინატი',w:200,h:120,q:100,c:'#a8845a',k:'ლამინატი',note:'თბილისი'},{n:'MDF',w:150,h:90,q:65,c:'#d9b58a',k:'MDF',note:'რუსთავი'},{n:'ლამინატი',w:120,h:80,q:45,c:'#8a6a45',k:'ლამინატი',note:'ქუთაისი'}];
+const OFF=[{n:'ფანერა',w:180,h:140,q:12,c:'#c98f55',k:'ლამინატი',note:'180 x 140 მმ'},{n:'MDF',w:120,h:80,q:6,c:'#8d8896',k:'MDF',note:'120 x 80 მმ'},{n:'ფანერა',w:100,h:60,q:8,c:'#eef1f6',k:'ლამინატი',note:'100 x 60 მმ'}];
+const DB=[{n:'ფანერა',w:200,h:120,q:10,c:'#a8845a',k:'ლამინატი',note:'200 x 120 მმ'},{n:'MDF',w:150,h:90,q:5,c:'#d9b58a',k:'MDF',note:'150 x 90 მმ'},{n:'ფანერა',w:120,h:80,q:4,c:'#8a6a45',k:'ლამინატი',note:'120 x 80 მმ'}];
 const F={off:'ყველა',db:'ყველა'};let Q='';
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.x);toast.x=setTimeout(()=>t.classList.remove('show'),2200)};
 const ic=i=>`<svg class="i" style="width:14px;height:14px"><use href="#${i}"/></svg>`;
@@ -274,7 +268,7 @@ function render(){
  $('#projects').innerHTML=P.filter(p=>p.n.toLowerCase().includes(Q)).map((p,i)=>`<button class="sub pc" data-p="${i}"><div class="row" style="justify-content:flex-start;gap:12px"><div class="thumb"><svg class="i"><use href="#plan"/></svg></div><div><b>${p.n}</b><div class="muted">${p.d}</div></div></div><div style="margin-top:12px"><span class="badge b-${p.s}">${ic(p.s=='ok'?'chk':'plan')}${p.t}</span></div></button>`).join('')||'<div class="muted">შეკვეთა ვერ მოიძებნა</div>';
  [['off',OFF],['db',DB]].forEach(([k,a])=>{
   const l=a.filter(m=>(F[k]=='ყველა'||m.k==F[k])&&(m.n+m.note+m.k+m.w+m.h).toLowerCase().includes(Q));
-  $('#'+k+'List').innerHTML=l.map(m=>`<button class="sub mat" data-m="${k}:${a.indexOf(m)}"><div class="mimg" style="background:linear-gradient(135deg,${m.c},${m.c}bb)"></div><b>${m.n}</b><div class="muted">${m.w} × ${m.h} სმ</div><div class="muted">${k=='db'?m.q+' ც · '+m.note:m.q+' ც'}</div></button>`).join('')||'<div class="muted" style="grid-column:1/-1">ვერაფერი მოიძებნა</div>';
+  $('#'+k+'List').innerHTML=l.map(m=>`<button class="sub mat" data-m="${k}:${a.indexOf(m)}"><div class="mimg" style="background:linear-gradient(135deg,${m.c},${m.c}bb)"></div><b>${m.n}</b><div class="muted">${m.note}</div><div class="muted">${m.q} ცალი</div></button>`).join('')||'<div class="muted" style="grid-column:1/-1">ვერაფერი მოიძებნა</div>';
  });
 }
 
@@ -335,17 +329,6 @@ function openTextMode(){
  dlg(`<div class="h">ხელით შეყვანა</div>
   <textarea id="manualText" class="sub" rows="4" style="width:100%;padding:10px;margin:12px 0" placeholder="მაგ.: 100x60 - 2ც, 70x40 - 4ც კრომკით"></textarea>
   <button class="btn grad" style="width:100%;justify-content:center" onclick="showVerificationGate([['დეტალი A',1000,600,2,'2 მმ'],['დეტალი B',700,400,4,'1 მმ']])">ცხრილის გენერირება</button>`);
-}
-
-function open3DMode(){
- dlg(`<div class="h">3D ნახაზი & მოდელირება</div>
-  <p class="sec" style="font-size:13px;margin:8px 0 14px">ატვირთეთ ესკიზი ან ჩაწერეთ ზომები 3D მოდელის გენერირებისთვის.</p>
-  <div class="sub" style="padding:16px;text-align:center;margin-bottom:14px;border-color:rgba(255,138,61,.4)">
-   <svg class="i" style="width:44px;height:44px;color:#FF8A3D;margin:0 auto 8px"><use href="#cube"/></svg>
-   <b>3D მოდულის ინტეგრაცია</b>
-   <div class="muted" style="margin-top:4px">კარადის, ტუმბოს ან მაგიდის გენერირება ზომებით</div>
-  </div>
-  <button class="btn grad" style="width:100%;justify-content:center" onclick="closeD();toast('3D გენერაცია მუშავდება...')">დიზაინის შექმნა</button>`);
 }
 
 function showVerificationGate(items){
