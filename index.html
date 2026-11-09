@@ -3,7 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>Smart Raskroi AI</title><link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%230A1428'/%3E%3Cg transform='scale(3.5) translate(2, 2)'%3E%3Cpath d='M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z' fill='none' stroke='%23FF8A3D' stroke-width='1.5'/%3E%3Cpolyline points='3.27 6.96 12 12.01 20.73 6.96' fill='none' stroke='%23FF8A3D' stroke-width='1.5'/%3E%3Cline x1='12' y1='22.08' x2='12' y2='12' stroke='%23FF8A3D' stroke-width='1.5'/%3E%3C/g%3E%3C/svg%3E">
+<title>Smart Raskroi AI</title>
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAJAAAACQCAMAAADfABOoAAAAP1BMVEUAChT/ij3//67/0aP/lUP/lDr/v1r/tFP/t1v/nEX/kjz/xWz/rEn/s1T/uFn/mkb/qlT/zK//qlP/p0f/iT7/lTz9n4hMAAAAFHRSTlMACfD6xX7P1Y9a72kM48w2wWn8RzF7kAAAAadJREFUeNrt2ktug0AQRuFIyL8n5v532l1UVbI3yA5kC7pP4i4k3kgnWbIt27Zt27Zt27Zt27Zt27Zt27Zt27Zt27b91y0nIe4G+5pE3H33PYm2h7s6B00c25Z93g+c7vE5i7jD3W48n1lE3eD1P/p45l7Gv01/WkR9463+x/Wc8+L0b8fF7fN+kff/6/K+ZpH1sL6i94Fft89B1Dfc3yIit0/c4zH8b5ZlWZZlWZZlWZZlWZZlWZZlWZZlWZZlWZZlWZb1t3sDYhQx33a3AAAAAElFTkSuQmCC">
 <script src="https://cdn.tailwindcss.com/3.4.17"></script>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Georgian:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -72,16 +73,13 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .aic{margin-top:auto;padding:14px;display:grid;gap:8px;font-size:13px;background:radial-gradient(ellipse at 80% 0,rgba(255,138,61,.55),transparent 65%),linear-gradient(160deg,#2a1a14,#0A1428)}
 .mtop,.mnav{display:none}
 
-/* Action Sheet & Modals */
+/* Action Sheet & Verification Modal */
 .ov{position:fixed;inset:0;z-index:200;background:rgba(3,8,23,.82);display:none;place-items:center;padding:16px;backdrop-filter:blur(8px)}
 .ov.show{display:grid}
 .dlg{width:min(480px,100%);max-height:88vh;overflow:auto;padding:22px;border-color:var(--bd-blue)}
-.stepbar{display:flex;gap:4px;margin:12px 0}.stepbar i{flex:1;height:4px;border-radius:2px;background:var(--bd)}.stepbar i.on{background:var(--g1)}
-.opt{display:block;width:100%;text-align:left;padding:11px 14px;margin:6px 0;min-height:44px}
 .toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);z-index:300;padding:10px 18px;border-radius:999px;background:#0D2342;border:1px solid var(--bd-blue);font-size:13px;opacity:0;pointer-events:none;transition:.3s}
 .toast.show{opacity:1}
 
-/* Mobile Action Sheet */
 .sheet-backdrop{position:fixed;inset:0;background:rgba(3,8,23,.75);backdrop-filter:blur(6px);z-index:150;opacity:0;pointer-events:none;transition:opacity .3s ease}
 .sheet-backdrop.open{opacity:1;pointer-events:auto}
 .sheet{position:fixed;left:0;right:0;bottom:0;z-index:160;background:var(--gp);border-top:1px solid var(--bd-blue);border-radius:24px 24px 0 0;padding:18px 20px calc(24px + env(safe-area-inset-bottom));transform:translateY(100%);transition:transform .32s cubic-bezier(0.16,1,0.3,1);box-shadow:0 -10px 40px rgba(0,0,0,.6)}
@@ -92,7 +90,6 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .sheet-item:hover{background:var(--hover);border-color:var(--bd-blue)}
 .sheet-item svg{color:#FF8A3D}
 
-/* Inline Table & Highlight */
 .verify-table{width:100%;border-collapse:collapse;margin:12px 0;font-size:13px}
 .verify-table th,.verify-table td{padding:8px 10px;text-align:left;border-bottom:1px solid var(--bd)}
 .verify-table th{color:var(--t3);font-weight:500}
@@ -138,14 +135,14 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 
 <header class="mtop">
  <button aria-label="ძიება" onclick="document.getElementById('ms').classList.toggle('show')"><svg class="i"><use href="#srch"/></svg></button>
- <div class="logo" style="font-size:18px"><div class="hex" style="width:28px;height:28px"><svg class="i" style="width:16px"><use href="#box"/></svg></div>Smart Raskroi <b>AI</b></div>
+ <div class="logo" style="font-size:18px"><div class="hex" style="width:28px;height:28px"><svg class="i" style="width:16px"><use href="#cube"/></svg></div>Smart Raskroi <b>AI</b></div>
  <button aria-label="შეტყობინებები" onclick="toast('ახალი შეტყობინებები არ არის')"><svg class="i"><use href="#bell"/></svg></button>
  <label class="search" id="ms"><svg class="i"><use href="#srch"/></svg><input data-search placeholder="მოძებნე..."></label>
 </header>
 
 <div class="app">
 <aside class="side">
- <div class="logo" style="margin-bottom:18px"><div class="hex"><svg class="i"><use href="#box"/></svg></div><span>Smart Raskroi <b>AI</b></span></div>
+ <div class="logo" style="margin-bottom:18px"><div class="hex"><svg class="i"><use href="#cube"/></svg></div><span>Smart Raskroi <b>AI</b></span></div>
  <button class="nav on" data-go="home"><svg class="i"><use href="#home"/></svg><span class="tx">მთავარი</span></button>
  <button class="nav" data-go="orders"><svg class="i"><use href="#list"/></svg><span class="tx">შეკვეთების მენეჯმენტი</span></button>
  <button class="nav" data-go="upload"><svg class="i"><use href="#up"/></svg><span class="tx">ფაილის ატვირთვა</span></button>
@@ -158,7 +155,7 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
   <b>AI ასისტენტი</b><span class="muted">დაიწყე საუბარი და მე დაგეხმარები</span>
   <button class="btn grad" style="justify-content:center" onclick="openActionSheet()"><svg class="i"><use href="#mic"/></svg>ახალი შეკვეთა</button>
  </div>
- <div class="muted" style="padding:8px 6px">ვერსია 1.0.0 · Raskroi AI</div>
+ <div class="muted" style="padding:8px 6px">ვერსია 1.0.0 · Smart Raskroi AI</div>
 </aside>
 
 <main class="main">
@@ -210,5 +207,144 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 <nav class="mnav" aria-label="ძირითადი ნავიგაცია">
  <button class="on" data-go="home"><svg class="i"><use href="#home"/></svg>მთავარი</button>
  <button data-go="orders"><svg class="i"><use href="#list"/></svg>შეკვეთები</button>
- <button class="ai" onclick="openActionSheet()" aria-label="ახალი შეკვეთა"><svg class="i" style="width:28px;height:28px"><use href="#mic"/></svg></button>
- <button data-go="
+ <button class="ai" onclick="openActionSheet()" aria-label="ახალი შეკვეთა"><svg class="i" style="width:28px;height:28px"><use href="#cube"/></svg></button>
+ <button data-go="off"><svg class="i"><use href="#box"/></svg>ნარჩენები</button>
+ <button data-go="profile"><svg class="i"><use href="#user"/></svg>პროფილი</button>
+</nav>
+
+<!-- Mobile Bottom Action Sheet -->
+<div class="sheet-backdrop" id="sheetBackdrop" onclick="closeActionSheet()"></div>
+<div class="sheet" id="actionSheet">
+ <div class="sheet-pill"></div>
+ <div class="row" style="margin-bottom:14px"><span class="h">როგორ გსურთ შეკვეთის მიცემა?</span><button class="muted" onclick="closeActionSheet()">✕</button></div>
+ <div class="sheet-grid">
+  <button class="sheet-item" onclick="triggerAction('voice')"><svg class="i" style="width:24px;height:24px"><use href="#mic"/></svg><b>ხმოვანი რეჟიმი</b><span class="muted">კარნახით შეყვანა</span></button>
+  <button class="sheet-item" onclick="triggerAction('photo')"><svg class="i" style="width:24px;height:24px"><use href="#cam"/></svg><b>ფოტოს ატვირთვა</b><span class="muted">ხელნაწერი შპარგალკა</span></button>
+  <button class="sheet-item" onclick="triggerAction('text')"><svg class="i" style="width:24px;height:24px"><use href="#doc"/></svg><b>ტექსტით შეყვანა</b><span class="muted">ზომების ჩაწერა</span></button>
+  <button class="sheet-item" onclick="triggerAction('3d')"><svg class="i" style="width:24px;height:24px"><use href="#cube"/></svg><b>3D ნახაზი</b><span class="muted">ესკიზიდან ავეჯი</span></button>
+ </div>
+</div>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true"><div class="panel dlg" id="dlg"></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const P=[{n:'შავნაბადა',d:'12.10.2025',s:'ok',t:'დამტკიცებულია'},{n:'LTBDS',d:'10.10.2025',s:'pr',t:'პროექტი'},{n:'Geolami',d:'08.10.2025',s:'dr',t:'შეყვანილი'}];
+const OFF=[{n:'ლამინატი',w:180,h:140,q:3,c:'#c98f55',k:'ლამინატი',note:'მუხის დეკორი'},{n:'MDF',w:120,h:80,q:3,c:'#8d8896',k:'MDF',note:'ნაცრისფერი'},{n:'ლამინატი',w:100,h:60,q:1,c:'#eef1f6',k:'ლამინატი',note:'თეთრი'}];
+const DB=[{n:'ლამინატი',w:200,h:120,q:100,c:'#a8845a',k:'ლამინატი',note:'თბილისი'},{n:'MDF',w:150,h:90,q:65,c:'#d9b58a',k:'MDF',note:'რუსთავი'},{n:'ლამინატი',w:120,h:80,q:45,c:'#8a6a45',k:'ლამინატი',note:'ქუთაისი'}];
+const F={off:'ყველა',db:'ყველა'};let Q='';
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.x);toast.x=setTimeout(()=>t.classList.remove('show'),2200)};
+const ic=i=>`<svg class="i" style="width:14px;height:14px"><use href="#${i}"/></svg>`;
+
+function render(){
+ $('#projects').innerHTML=P.filter(p=>p.n.toLowerCase().includes(Q)).map((p,i)=>`<button class="sub pc" data-p="${i}"><div class="row" style="justify-content:flex-start;gap:12px"><div class="thumb"><svg class="i"><use href="#plan"/></svg></div><div><b>${p.n}</b><div class="muted">${p.d}</div></div></div><div style="margin-top:12px"><span class="badge b-${p.s}">${ic(p.s=='ok'?'chk':'plan')}${p.t}</span></div></button>`).join('')||'<div class="muted">შეკვეთა ვერ მოიძებნა</div>';
+ [['off',OFF],['db',DB]].forEach(([k,a])=>{
+  const l=a.filter(m=>(F[k]=='ყველა'||m.k==F[k])&&(m.n+m.note+m.k+m.w+m.h).toLowerCase().includes(Q));
+  $('#'+k+'List').innerHTML=l.map(m=>`<button class="sub mat" data-m="${k}:${a.indexOf(m)}"><div class="mimg" style="background:linear-gradient(135deg,${m.c},${m.c}bb)"></div><b>${m.n}</b><div class="muted">${m.w} × ${m.h} სმ</div><div class="muted">${k=='db'?m.q+' ც · '+m.note:m.q+' ც'}</div></button>`).join('')||'<div class="muted" style="grid-column:1/-1">ვერაფერი მოიძებნა</div>';
+ });
+}
+
+$$('[data-chips]').forEach(c=>{const k=c.dataset.chips;c.innerHTML=['ყველა','ლამინატი','MDF'].map(x=>`<button class="chip ${x=='ყველა'?'on':''}">${x}</button>`).join('');
+ c.onclick=e=>{if(!e.target.classList.contains('chip'))return;F[k]=e.target.textContent;[...c.children].forEach(b=>b.classList.toggle('on',b==e.target));render()}});
+$$('[data-search]').forEach(i=>i.oninput=e=>{Q=e.target.value.trim().toLowerCase();$$('[data-search]').forEach(x=>x!==i&&(x.value=e.target.value));render()});
+
+document.addEventListener('click',e=>{
+ const p=e.target.closest('[data-p]'),m=e.target.closest('[data-m]');
+ if(p){const o=P[p.dataset.p];dlg(`<div class="h">${o.n}</div><p class="sec">თარიღი: ${o.d}<br>სტატუსი: ${o.t}</p><button class="btn grad" onclick="closeD();toast('პროექტი გაიხსნა')">გახსნა</button> <button class="btn" onclick="closeD()">დახურვა</button>`)}
+ if(m){const[k,i]=m.dataset.m.split(':'),o=(k=='off'?OFF:DB)[i];dlg(`<div class="mimg" style="height:90px;background:linear-gradient(135deg,${o.c},${o.c}bb)"></div><div class="h">${o.n} · ${o.note}</div><p class="sec">ზომა: ${o.w} × ${o.h} სმ<br>სისქე: 18 მმ<br>რაოდენობა: ${o.q} ც</p><button class="btn grad" onclick="closeD();toast('დაემატა რასკროიში')">რასკროიში დამატება</button> <button class="btn" onclick="closeD()">დახურვა</button>`)}
+ if(e.target.id=='ov')closeD();
+ const g=e.target.closest('[data-go]');if(g)go(g.dataset.go);
+});
+document.addEventListener('keydown',e=>e.key=='Escape'&&(closeD(),closeActionSheet()));
+
+function dlg(h){$('#dlg').innerHTML=h;$('#ov').classList.add('show')}
+function closeD(){$('#ov').classList.remove('show')}
+function go(k){
+ $$('[data-go]').forEach(b=>b.classList.toggle('on',b.dataset.go==k));
+ const t={home:'orders',orders:'orders',off:'off',db:'db',upload:'quick'}[k];
+ if(t)($('#'+t)).scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function openActionSheet(){$('#sheetBackdrop').classList.add('open');$('#actionSheet').classList.add('open')}
+function closeActionSheet(){$('#sheetBackdrop').classList.remove('open');$('#actionSheet').classList.remove('open')}
+function triggerAction(type){
+ closeActionSheet();
+ if(type==='voice')startVoice();
+ if(type==='photo')openPhotoMode();
+ if(type==='text')openTextMode();
+ if(type==='3d')open3DMode();
+}
+
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+function startVoice(){
+ dlg(`<div class="h">ხმოვანი ასისტენტი</div>
+  <div style="text-align:center;padding:18px 0">
+   <button class="hex" style="width:72px;height:72px;margin:0 auto;border-radius:50%" id="micb"><svg class="i" style="width:32px;height:32px"><use href="#mic"/></svg></button>
+   <p id="tr" class="sec" style="margin:14px 0 6px">${SR?'დააჭირე და დაიწყე კარნახი...':'ხმის ამოცნობა მიუწვდომელია'}</p>
+   <input id="ti" class="sub" style="padding:10px 14px;width:100%" placeholder="მაგ.: 2 დეტალი 720×450, 4 დეტალი 600×300">
+  </div>
+  <button class="btn grad" style="width:100%;justify-content:center" onclick="showVerificationGate([['კარადის კედელი',720,450,2,'2 მმ'],['თარო (საეჭვო)',600,300,4,'—']])">ამოცნობა და გადამოწმება</button>`);
+}
+
+function openPhotoMode(){
+ dlg(`<div class="h">ფოტოს ატვირთვა</div>
+  <p class="sec" style="font-size:13px;margin:8px 0 14px">გადაუღეთ ფოტო ხელნაწერ შპარგალკას ან ნახაზს.</p>
+  <input type="file" id="photoInput" accept="image/*" capture="environment" class="sub" style="padding:10px;width:100%;margin-bottom:12px" onchange="$('#photoTips').style.display='block'">
+  <div id="photoTips" class="sub" style="padding:12px;display:none;border-color:rgba(255,190,85,.5);background:rgba(255,190,85,.08);margin-bottom:12px">
+   <div style="color:var(--warn);font-weight:600;font-size:13px">⚠️ ფოტო ბუნდოვანია</div>
+   <div class="muted" style="margin-top:4px">გთხოვთ გადაიღოთ უკეთეს განათებაში, რათა ციფრები ზუსტად ამოვიცნოთ.</div>
+  </div>
+  <button class="btn grad" style="width:100%;justify-content:center" onclick="showVerificationGate([['დეტალი 1',850,500,2,'ორმხრივი'],['დეტალი 2 (საეჭვო)',720,280,1,'1 მმ']])">გადამოწმებაზე გადასვლა</button>`);
+}
+
+function openTextMode(){
+ dlg(`<div class="h">ხელით შეყვანა</div>
+  <textarea id="manualText" class="sub" rows="4" style="width:100%;padding:10px;margin:12px 0" placeholder="მაგ.: 100x60 - 2ც, 70x40 - 4ც კრომკით"></textarea>
+  <button class="btn grad" style="width:100%;justify-content:center" onclick="showVerificationGate([['დეტალი A',1000,600,2,'2 მმ'],['დეტალი B',700,400,4,'1 მმ']])">ცხრილის გენერირება</button>`);
+}
+
+function open3DMode(){
+ dlg(`<div class="h">3D ნახაზი & მოდელირება</div>
+  <p class="sec" style="font-size:13px;margin:8px 0 14px">ატვირთეთ ესკიზი ან ჩაწერეთ ზომები 3D მოდელის გენერირებისთვის.</p>
+  <div class="sub" style="padding:16px;text-align:center;margin-bottom:14px">
+   <svg class="i" style="width:44px;height:44px;color:#FF8A3D;margin:0 auto 8px"><use href="#cube"/></svg>
+   <b>3D მოდულის ინტეგრაცია</b>
+   <div class="muted" style="margin-top:4px">კარადის, ტუმბოს ან მაგიდის გენერირება ზომებით</div>
+  </div>
+  <button class="btn grad" style="width:100%;justify-content:center" onclick="closeD();toast('3D გენერაცია მუშავდება...')">დიზაინის შექმნა</button>`);
+}
+
+function showVerificationGate(items){
+ const rows=items.map(it=>`
+  <tr>
+   <td><input class="editable-cell" value="${it[0]}"></td>
+   <td><input class="editable-cell" value="${it[1]}"></td>
+   <td>${it[0].includes('საეჭვო')?`<span class="cell-warn"><input class="editable-cell" style="color:#FFD285;font-weight:700" value="${it[2]}"> ⚠️</span>`:`<input class="editable-cell" value="${it[2]}">`}</td>
+   <td><input class="editable-cell" style="max-width:44px" value="${it[3]}"></td>
+   <td><input class="editable-cell" value="${it[4]}"></td>
+  </tr>`).join('');
+
+ dlg(`<div class="h">გადაამოწმეთ რასკროის დეტალები</div>
+  <p class="sec" style="font-size:12px;margin:4px 0 10px">გთხოვთ გადახედოთ ზომებს. საეჭვო უჯრა მონიშნულია — შეგიძლიათ შეასწოროთ ხელით:</p>
+  <div style="overflow-x:auto">
+   <table class="verify-table">
+    <thead><tr><th>დეტალი</th><th>სიგრძე</th><th>სიგანე</th><th>ცალი</th><th>კრომკა</th></tr></thead>
+    <tbody>${rows}</tbody>
+   </table>
+  </div>
+  <div style="display:flex;gap:10px;margin-top:14px">
+   <button class="btn grad" style="flex:1;justify-content:center" onclick="confirmOrder()">დადასტურება & გაგზავნა</button>
+   <button class="btn sub" onclick="closeD()">გაუქმება</button>
+  </div>`);
+}
+
+function confirmOrder(){
+ P.unshift({n:'ახალი შეკვეთა',d:new Date().toLocaleDateString('ka-GE').replace(/\//g,'.'),s:'pr',t:'გადამოწმებული'});
+ render();closeD();toast('შეკვეთა გადამოწმდა და გაიგზავნა!');
+}
+
+render();
+</script>
+</body>
+</html>
